@@ -4,5 +4,8 @@
   },
   "sayHiToYourNewTab": {
     "message": "Say hi to your new tab"
+  },
+  "longDescription": {
+    "message": "Use holi to organize your thoughts in your new tab page or manage your bookmarks with a simple, minimal sidebar"
   }
 }

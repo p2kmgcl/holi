@@ -4,5 +4,8 @@
   },
   "sayHiToYourNewTab": {
     "message": "Di hola a tu nueva pestaña"
+  },
+  "longDescription": {
+    "message": "Utiliza holi para organizar tus pensamientos en tu página de nueva pestaña u organizar tus marcadores en una simple y sencilla barra lateral"
   }
 }
