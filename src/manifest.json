@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Holi",
+  "version": "1.0.0",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "bookmarks",
+    "chrome://favicon/"
+  ]
+}

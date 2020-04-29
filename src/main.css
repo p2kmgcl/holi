@@ -1,0 +1,15 @@
+body {
+  font-family: Cascadia Mono PL, Cascadia Mono, Consolas, Inconsolata, monospace;
+  margin: 0;
+}
+
+.main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

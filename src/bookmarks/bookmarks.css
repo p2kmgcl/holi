@@ -1,0 +1,61 @@
+.bookmarks {
+  border-left: solid #ccc thin;
+  max-width: 300px;
+  min-width: 200px;
+  height: 100vh;
+  overflow: auto;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+.link:first-child {
+  margin-top: 0.5rem;
+}
+
+.link,
+.link:visited {
+  color: #444;
+}
+
+.link:hover,
+.link:active {
+  background: #444;
+  color: #eee;
+}
+
+.icon {
+  min-height: 16px;
+  min-width: 16px;
+  max-height: 16px;
+  max-width: 16px;
+  margin-right: 0.5rem;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  color: #444;
+  display: inline-block;
+  background-color: #ddd;
+  border-radius: 0 1rem 1rem 0;
+}
+
+h1.heading {
+  position: sticky;
+  top: 0;
+  display: block;
+  text-align: center;
+  border-radius: 0;
+}
+
+.heading:first-child {
+  margin-top: 0;
+}
