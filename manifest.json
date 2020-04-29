@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Holi",
+  "version": "1.0.0",
+  "description": "__MSG_sayHiToYourNewTab__",
+  "default_locale": "en",
+  "icons": {
+    "128": "icon/icon-128.png",
+    "48": "icon/icon-48.png",
+    "16": "icon/icon-16.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "src/newtab.html"
+  },
+  "permissions": [
+    "bookmarks",
+    "chrome://favicon/"
+  ]
+}
