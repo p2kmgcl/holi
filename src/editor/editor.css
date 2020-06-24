@@ -8,6 +8,6 @@
 }
 
 .CodeMirror {
-  font-family: Cascadia Code PL;
+  font-family: inherit;
   height: 100%;
 }
