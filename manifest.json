@@ -14,6 +14,7 @@
   },
   "permissions": [
     "bookmarks",
+    "storage",
     "chrome://favicon/"
   ]
 }
