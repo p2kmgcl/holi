@@ -1,10 +1,16 @@
-const editor = CodeMirror(document.getElementById('editor'), {
-  value: localStorage.getItem('holi_editor') || '',
-  mode: 'markdown',
-  theme: 'idea',
-  lineWrapping: false,
-});
+window.createEditor = async () => {
+  const editor = CodeMirror(document.getElementById('editor'), {
+    value: await StorageService.getValue(),
+    mode: 'markdown',
+    theme: 'idea',
+    lineWrapping: true,
+  });
 
-editor.on('change', () => {
-  localStorage.setItem('holi_editor', editor.getDoc().getValue());
-});
+  StorageService.onChange((text) => {
+    editor.getDoc().setValue(text);
+  });
+
+  editor.on('change', () => {
+    StorageService.setValue(editor.getDoc().getValue());
+  });
+};
