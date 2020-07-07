@@ -11,3 +11,22 @@
   font-family: inherit;
   height: 100%;
 }
+
+.cm-header-1 {
+  border-bottom: solid 4px;
+  font-size: 1em;
+  margin: 1em 0 0.5em 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.editor-inline-link {
+  color: #88f;
+  border: solid #e1e1ff thin;
+  background: #f5f5ff;
+  padding: 0 0.1em;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 1px;
+  text-decoration: none;
+}
