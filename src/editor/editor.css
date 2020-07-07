@@ -20,6 +20,11 @@
   display: inline-block;
 }
 
+.editor-inline-hr {
+  display: inline-block;
+  width: 100%;
+}
+
 .editor-inline-link {
   color: #88f;
   border: solid #e1e1ff thin;

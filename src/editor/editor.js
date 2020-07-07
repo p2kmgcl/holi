@@ -2,6 +2,21 @@ const parseLinks = (doc, { fromLine, toLine }) => {
   doc.eachLine(fromLine, toLine, (line) => {
     const lineNumber = doc.getLineNumber(line);
 
+    if (line.text === '---') {
+      const hrElement = document.createElement('hr');
+      hrElement.classList.add('editor-inline-hr');
+
+      doc.markText(
+        { line: lineNumber, ch: 0 },
+        { line: lineNumber, ch: 3 },
+        {
+          replacedWith: hrElement,
+          inclusiveLeft: false,
+          inclusiveRight: false,
+        }
+      );
+    }
+
     line.text.replace(/https?:\/\/[^\s]+/gi, (url, index) => {
       const linkElement = document.createElement('a');
 
