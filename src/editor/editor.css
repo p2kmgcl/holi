@@ -1,7 +1,7 @@
 .editor {
   padding: 10vmin;
   box-sizing: border-box;
-  font-size: 2vmin;
+  font-size: 16px;
   flex-grow: 1;
   height: 100%;
   max-width: calc(100vw - 200px);
