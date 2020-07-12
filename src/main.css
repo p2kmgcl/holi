@@ -1,4 +1,18 @@
+html {
+  font-size: 18px;
+}
+
 body {
+  --background: #fff;
+  --color: #000;
+  --title-border-color: #ddd;
+  --title-background-color: #f1f1f1;
+  --title-color: #666;
+  --link-border-color: #ddd;
+  --link-background-color: #eaeaea;
+  --link-color: #000;
+  --link-opacity: 0.6;
+
   font-family:
     JetBrains Mono,
     Cascadia Mono PL,
@@ -11,10 +25,12 @@ body {
 }
 
 .main {
-  height: 100vh;
-  width: 100vw;
+  background: var(--background);
+  color: var(--color);
   display: flex;
-  overflow: hidden;
+  justify-content: center;
+  padding: 2rem 2.5rem 2rem 2.75rem;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {

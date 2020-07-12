@@ -33,6 +33,6 @@ const renderChild = (child, depth = 0) => {
 
 window.createBookmarks = () => {
   chrome.bookmarks.getTree((children) => {
-    children.map((child) => renderChild(child));
+    children[0].children.map((child) => renderChild(child));
   });
 };
