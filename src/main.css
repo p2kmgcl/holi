@@ -33,6 +33,16 @@ body {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  width: 0;
+@media (prefers-color-scheme: dark) {
+  .main {
+    --background: #222;
+    --color: #aaa;
+    --title-border-color: #444;
+    --title-background-color: #333;
+    --title-color: #999;
+    --link-border-color: #444;
+    --link-background-color: #333;
+    --link-color: #999;
+    --link-opacity: 0.6;
+  }
 }
