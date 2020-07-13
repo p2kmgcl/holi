@@ -1,8 +1,4 @@
 html {
-  font-size: 18px;
-}
-
-body {
   --background: #fff;
   --color: #000;
   --title-border-color: #ddd;
@@ -12,6 +8,12 @@ body {
   --link-background-color: #eaeaea;
   --link-color: #000;
   --link-opacity: 0.6;
+
+  background: var(--background);
+  font-size: 18px;
+}
+
+body {
 
   font-family:
     JetBrains Mono,
@@ -24,8 +26,12 @@ body {
   margin: 0;
 }
 
+body.loading {
+  opacity: 0;
+  overflow: hidden;
+}
+
 .main {
-  background: var(--background);
   color: var(--color);
   display: flex;
   justify-content: center;
@@ -34,7 +40,7 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-  .main {
+  html {
     --background: #222;
     --color: #aaa;
     --title-border-color: #444;

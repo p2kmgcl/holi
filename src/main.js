@@ -3,5 +3,6 @@ document.head.querySelector('title').innerText = chrome.i18n.getMessage(
 );
 
 StorageService.init()
+  .then(() => createBookmarks())
   .then(() => createEditor())
-  .then(() => createBookmarks());
+  .then(() => document.body.classList.remove('loading'));

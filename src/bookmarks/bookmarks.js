@@ -1,6 +1,6 @@
 const bookmarks = document.getElementById('bookmarks');
 
-const renderChild = (child, depth = 0) => {
+const renderChild = (child, wrapper, depth = 0) => {
   if (child.title && depth > 0) {
     let node;
 
@@ -19,20 +19,31 @@ const renderChild = (child, depth = 0) => {
       node.innerText = child.title;
     }
 
-    bookmarks.appendChild(node);
+    wrapper.appendChild(node);
   }
 
   if (child.children) {
     const grandChildDepth = Math.min(depth + 1, 6);
 
     child.children.map((grandChild) =>
-      renderChild(grandChild, grandChildDepth)
+      renderChild(grandChild, wrapper, grandChildDepth)
     );
   }
 };
 
-window.createBookmarks = () => {
-  chrome.bookmarks.getTree((children) => {
-    children[0].children.map((child) => renderChild(child));
+window.createBookmarks = () =>
+  new Promise((resolve) => {
+    const wrapper = document.createElement('div');
+
+    chrome.bookmarks.getTree((children) => {
+      children[0].children.map((child) => renderChild(child, wrapper));
+
+      requestAnimationFrame(() => {
+        bookmarks.appendChild(wrapper);
+
+        requestAnimationFrame(() => {
+          resolve();
+        });
+      });
+    });
   });
-};
