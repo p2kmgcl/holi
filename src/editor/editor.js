@@ -1,45 +1,52 @@
-const parseLinks = (doc, { fromLine, toLine }) => {
-  doc.eachLine(fromLine, toLine, (line) => {
-    const lineNumber = doc.getLineNumber(line);
-
-    if (line.text === '---') {
-      const hrElement = document.createElement('hr');
-      hrElement.classList.add('editor-inline-hr');
-
-      doc.markText(
-        { line: lineNumber, ch: 0 },
-        { line: lineNumber, ch: 3 },
-        {
-          replacedWith: hrElement,
-          inclusiveLeft: false,
-          inclusiveRight: false,
-        }
-      );
-    }
-
-    line.text.replace(/https?:\/\/[^\s]+/gi, (url, index) => {
-      const linkElement = document.createElement('a');
-
-      linkElement.classList.add('editor-inline-link');
-      linkElement.href = url;
-      linkElement.innerText = url
-        .replace(/^https:\/\/issues\.liferay\.com\/browse\//i, '')
-        .replace(/^https:\/\/github\.com\//i, '')
-        .replace(/^https?:\/\//i, '');
-
-      doc.markText(
-        { line: lineNumber, ch: index },
-        { line: lineNumber, ch: index + url.length },
-        {
-          replacedWith: linkElement,
-          inclusiveLeft: false,
-          inclusiveRight: false,
-        }
-      );
-
-      return url;
+const addMarks = (doc, from, to) => {
+  const markText = (replacedWith) => {
+    doc.markText(from, to, {
+      replacedWith,
+      clearOnEnter: true,
+      inclusiveLeft: false,
+      inclusiveRight: false,
     });
+  };
+
+  if (doc.findMarks(from, to).length) {
+    return;
+  }
+
+  const text = doc.getRange(from, to);
+
+  if (text === '---') {
+    const hrElement = document.createElement('hr');
+    hrElement.classList.add('editor-inline-hr');
+
+    markText(hrElement);
+  }
+
+  text.replace(/https?:\/\/[^\s]+/gi, (url) => {
+    const linkElement = document.createElement('a');
+
+    linkElement.classList.add('editor-inline-link');
+    linkElement.href = url;
+    linkElement.innerText = url
+      .replace(/^https:\/\/issues\.liferay\.com\/browse\//i, '')
+      .replace(/^https:\/\/github\.com\//i, '')
+      .replace(/^https?:\/\//i, '');
+
+    markText(linkElement);
+
+    return url;
   });
+};
+
+const parseLine = (doc, line) => {
+  const chunks = line.text.split(' ');
+  const lineNo = line.lineNo();
+  let fromCh = 0;
+
+  while (chunks.length) {
+    const toCh = fromCh + chunks.shift().length + 1;
+    addMarks(doc, { line: lineNo, ch: fromCh }, { line: lineNo, ch: toCh });
+    fromCh = toCh;
+  }
 };
 
 window.createEditor = async () => {
@@ -51,17 +58,36 @@ window.createEditor = async () => {
   });
 
   const doc = editor.getDoc();
-  parseLinks(doc, { fromLine: 0, toLine: doc.lastLine() + 1 });
+  doc.eachLine((line) => parseLine(doc, line));
 
   StorageService.onChange((text) => {
     doc.setValue(text);
   });
 
   editor.on('change', (_, range) => {
-    parseLinks(doc, {
-      fromLine: range.from.line - 1,
-      toLine: range.to.line + 1,
-    });
+    if (
+      range.origin === '+input' &&
+      ['', ' '].includes(range.text[range.text.length - 1])
+    ) {
+      const line = range.from.line;
+      const toCh = range.to.ch;
+
+      const chunks = doc
+        .getRange({ line, ch: 0 }, { line, ch: toCh }, ' ')
+        .split(/\s/)
+        .filter((s) => s);
+
+      chunks.pop();
+
+      const fromCh =
+        chunks.map((s) => s.length).reduce((a, b) => a + b, 0) + chunks.length;
+
+      addMarks(doc, { line, ch: fromCh }, { line, ch: toCh });
+    } else if (range.origin === 'paste') {
+      doc.eachLine(range.from.line, range.to.line + range.text.length, (line) =>
+        parseLine(doc, line)
+      );
+    }
 
     StorageService.setValue(doc.getValue());
   });
