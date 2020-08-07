@@ -10,11 +10,10 @@ html {
   --link-opacity: 0.6;
 
   background: var(--background);
-  font-size: 18px;
+  font-size: 16px;
 }
 
 body {
-
   font-family:
     JetBrains Mono,
     Cascadia Mono PL,
