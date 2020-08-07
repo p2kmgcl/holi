@@ -1,9 +1,8 @@
 .bookmarks {
   font-size: 0.875rem;
+  background: var(--background);
+  border-left: var(--link-border-color) solid thin;
   text-align: right;
-  min-width: 32ch;
-  max-width: 25%;
-  flex-grow: 1;
 }
 
 .link {
@@ -40,40 +39,49 @@
   opacity: 1;
 }
 
-.icon {
-  max-width: 1rem;
-  min-width: 1rem;
-  max-height: 1rem;
-  min-height: 1rem;
+.link-icon {
+  max-width: 16px;
+  min-width: 16px;
+  max-height: 16px;
+  min-height: 16px;
   margin-left: 0.5rem;
 }
 
-h1.heading {
-  font-size: 0.875rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: var(--title-color);
+.link-content {
   display: inline-block;
-  background-color: var(--title-background-color);
-  border: solid thin var(--title-border-color);
-  border-radius: 1rem;
-  padding: 0.25rem 1rem;
-  transition: padding ease 0.3s;
-  transition-delay: 1s;
-  will-change: padding;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: calc(var(--bookmarks-width) - 3rem);
+  transition: max-width ease var(--transition-duration);
+  will-change: max-width;
 }
 
-h2.heading,
-h3.heading,
-h4.heading,
-h5.heading,
-h6.heading {
-  font-size: 0.875rem;
-  font-weight: bold;
-  color: var(--title-color);
+.heading {
+  white-space: nowrap;
+  overflow: hidden;
   text-decoration: underline;
-  padding: 0.25rem 0.5rem 0.25rem 1rem;
-  transition: padding ease 0.3s;
-  transition-delay: 1s;
-  will-change: padding;
+  color: var(--title-color);
+  margin-right: 0.5rem;
+  margin-left: auto;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  transition: max-width ease var(--transition-duration);
+  will-change: max-width;
+}
+
+h1.heading {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+  .link-content,
+  .heading {
+    max-width: 0;
+  }
+
+  .bookmarks:hover .link-content,
+  .bookmarks:hover .heading {
+    max-width: calc(var(--bookmarks-width) - 3rem);
+  }
 }

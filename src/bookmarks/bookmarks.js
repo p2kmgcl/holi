@@ -10,8 +10,8 @@ const renderChild = (child, wrapper, depth = 0) => {
       node.href = child.url;
 
       node.innerHTML = `
-        <img class="icon" src="chrome://favicon/${child.url}" alt="" />
-        <span>${child.title}</span>
+        <img class="link-icon" src="chrome://favicon/${child.url}" alt="" />
+        <span class="link-content">${child.title}</span>
       `;
     } else {
       node = document.createElement(`h${depth}`);
@@ -34,6 +34,7 @@ const renderChild = (child, wrapper, depth = 0) => {
 window.createBookmarks = () =>
   new Promise((resolve) => {
     const wrapper = document.createElement('div');
+    wrapper.classList.add('bookmarks-wrapper')
 
     chrome.bookmarks.getTree((children) => {
       children[0].children.map((child) => renderChild(child, wrapper));

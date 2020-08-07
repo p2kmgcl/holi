@@ -8,6 +8,8 @@ html {
   --link-background-color: #eaeaea;
   --link-color: #000;
   --link-opacity: 0.6;
+  --bookmarks-width: 10rem;
+  --transition-duration: 0.3s;
 
   background: var(--background);
   font-size: 16px;
@@ -32,10 +34,49 @@ body.loading {
 
 .main {
   color: var(--color);
-  display: flex;
-  justify-content: center;
-  padding: 2rem 2.5rem 2rem 2.75rem;
+  position: relative;
+  width: calc(100vw - 4rem);
+  max-width: 60rem;
+  margin: 2rem auto;
   box-sizing: border-box;
+}
+
+.editor {
+  padding-right: calc(var(--bookmarks-width) + 2rem);
+}
+
+.bookmarks {
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 10;
+  max-width: 60vw;
+  padding-left: 0.75rem;
+  transition: box-shadow ease var(--transition-duration);
+  will-change: box-shadow;
+}
+
+.bookmarks:hover {
+  --bookmarks-width: 20rem;
+
+  box-shadow: -20px 20px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 800px) {
+  html {
+    --bookmarks-width: 3rem;
+  }
+
+  .bookmarks:hover {
+    --bookmarks-width: 20rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    --transition-duration: 0.3s;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
