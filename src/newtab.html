@@ -4,26 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New tab</title>
-    <link rel="stylesheet" href="../dependencies/codemirror.css" />
-    <link rel="stylesheet" href="../dependencies/idea.css" />
 
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="editor/editor.css" />
-    <link rel="stylesheet" href="bookmarks/bookmarks.css" />
+    <link rel="stylesheet" href="../dependencies/codemirror.css" />
+    <link rel="stylesheet" href="index.css" />
   </head>
-  <body class="loading">
-    <main class="main">
-      <div class="editor" id="editor"></div>
-      <div class="bookmarks" id="bookmarks"></div>
-    </main>
+  <body>
+    <main id="app"></main>
 
     <script src="../dependencies/codemirror.js"></script>
-    <script src="../dependencies/markdown.js"></script>
-    <script src="../dependencies/vue.js"></script>
+    <script src="../dependencies/codemirror-placeholder.js"></script>
+    <script src="../dependencies/codemirror-markdown.js"></script>
+    <script src="../dependencies/preact.js"></script>
+    <script src="../dependencies/preact-hooks.js"></script>
+    <script src="../dependencies/htm.js"></script>
+    <script src="../dependencies/htm-preact.js"></script>
 
-    <script src="storage.js"></script>
-    <script src="editor/editor.js"></script>
-    <script src="bookmarks/bookmarks.js"></script>
-    <script src="main.js"></script>
+    <script src="globals.js"></script>
+    <script src="index.js" type="module"></script>
   </body>
 </html>
