@@ -37,6 +37,7 @@ export const Editor = () => {
 
     .Editor_mirror a {
       color: var(--highlight);
+      white-space: nowrap;
     }
 
     .Editor_mirror a:hover {
