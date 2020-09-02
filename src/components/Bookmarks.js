@@ -1,7 +1,6 @@
 import { BookmarkService } from '../services/BookmarkService.js';
-import { BookmarkLink } from './BookmarkLink.js';
-import { BookmarkCategory } from './BookmarkCategory.js';
 import { useCSS } from '../hooks/useCSS.js';
+import { BookmarkChildren } from './BookmarkChildren.js';
 
 export const Bookmarks = () => {
   const [bookmarkBar, setBookmarkBar] = useState({
@@ -18,6 +17,7 @@ export const Bookmarks = () => {
     .Bookmarks {
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
       background: var(--background);
       overflow-y: auto;
       height: 100%;
@@ -47,16 +47,7 @@ export const Bookmarks = () => {
 
   return html`
     <div class="Bookmarks">
-      ${bookmarkBar.children.map(
-        (bookmark) =>
-          html`<${getBookmarkComponent(bookmark)}
-            bookmark=${bookmark}
-            key=${bookmark.id}
-          />`
-      )}
+      <${BookmarkChildren} bookmark=${bookmarkBar} />
     </div>
   `;
 };
-
-const getBookmarkComponent = (bookmark) =>
-  bookmark.url ? BookmarkLink : BookmarkCategory;

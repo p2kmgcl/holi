@@ -4,25 +4,29 @@ import { Placeholder } from './Placeholder.js';
 export const BookmarkLink = ({ bookmark }) => {
   useCSS(`
     .BookmarkLink {
+      align-items: center;
+      border-radius: 8px;
+      box-sizing: border-box;
+      color: inherit;
       display: flex;
       flex-direction: row-reverse;
-      align-items: center;
+      font-size: 0.875rem;
       padding: 0.5rem 1rem;
       text-decoration: none;
-      color: inherit;
-      font-size: 0.875rem;
       transition: background ease var(--transition-duration);
+      width: 100%;
       will-change: background;
-      border-radius: 8px;
     }
 
     .BookmarkLink:hover {
-      color: var(--highlight);
       background: var(--highlight-background);
+      color: var(--highlight);
       font-weight: bolder;
     }
 
     .BookmarkLink_label {
+      display: block;
+      flex-shrink: 1;
       margin-right: 1ch;
       overflow: hidden;
       white-space: nowrap;
@@ -30,7 +34,7 @@ export const BookmarkLink = ({ bookmark }) => {
   `);
 
   return html`
-    <${Placeholder} height="calc(16px + 1rem)">
+    <${Placeholder} height="calc(16px + 1rem)" width="100%">
       <a class="BookmarkLink" href=${bookmark.url}>
         <img
           class="BookmarkLink_image"
