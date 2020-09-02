@@ -44,6 +44,25 @@ export const Editor = () => {
       background: var(--highlight-background);
     }
 
+    .Editor_mirror .editor-element_checkbox {
+      background: var(--shadow-color);
+      width: 0.8rem;
+      height: 0.8rem;
+      margin: 0;
+      appearance: none;
+      vertical-align: baseline;
+      border: solid thin var(--border-color);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background ease var(--transition-duration);
+      will-change: transition;
+      outline: none;
+    }
+
+    .Editor_mirror .editor-element_checkbox:checked {
+      background: var(--highlight);
+    }
+
     .Editor_mirror .cm-header-1 {
       display: inline-block;
       border-bottom: solid 4px;
