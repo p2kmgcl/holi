@@ -3,6 +3,7 @@ import { GitHubPullRequestEditorElement } from '../editor-elements/GitHubPullReq
 import { JiraIssueEditorElement } from '../editor-elements/JiraIssueEditorElement.js';
 import { LinkEditorElement } from '../editor-elements/LinkEditorElement.js';
 import { CheckBoxEditorElement } from '../editor-elements/CheckboxEditorElement.js';
+import { EmojiEditorElement } from '../editor-elements/EmojiEditorElement.js';
 
 export const EDITOR_ELEMENTS = [
   HrEditorElement,
@@ -10,4 +11,5 @@ export const EDITOR_ELEMENTS = [
   JiraIssueEditorElement,
   LinkEditorElement,
   CheckBoxEditorElement,
+  EmojiEditorElement,
 ];

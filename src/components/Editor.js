@@ -63,6 +63,11 @@ export const Editor = () => {
       background: var(--highlight);
     }
 
+    .Editor_mirror .editor-element_emoji {
+      display: inline-block;
+      max-height: 1rem;
+    }
+
     .Editor_mirror .cm-header-1 {
       display: inline-block;
       border-bottom: solid 4px;
