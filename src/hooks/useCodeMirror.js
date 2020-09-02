@@ -95,7 +95,7 @@ const addMarks = (doc, from, to, getElementForText) => {
     text = doc.getRange(from, trimmedTo);
   }
 
-  const element = getElementForText(text, () => marker?.changed());
+  const element = getElementForText(text, () => marker);
 
   if (element) {
     marker = doc.markText(from, trimmedTo, {
