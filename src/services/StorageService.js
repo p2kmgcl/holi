@@ -12,6 +12,12 @@ let _syncData = {};
 
 export const StorageService = {
   async init() {
+    window.addEventListener('beforeunload', (event) => {
+      if (_syncTimeoutId) {
+        event.returnValue = '';
+      }
+    });
+
     const store = await new Promise((resolve) =>
       storage.get(STORE_KEY, (data) => resolve(data[STORE_KEY]))
     );
@@ -89,6 +95,8 @@ export const StorageService = {
 
     _syncTimeoutId = setTimeout(() => {
       storage.get(STORE_KEY, (data) => {
+        _syncTimeoutId = null;
+
         if (data?.[STORE_KEY]?.[SYNC_DATE_KEY] < _syncData[SYNC_DATE_KEY]) {
           storage.set({ [STORE_KEY]: _syncData });
         }
