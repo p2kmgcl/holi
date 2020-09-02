@@ -5,7 +5,7 @@ export const BookmarkLink = ({ bookmark }) => {
   useCSS(`
     .BookmarkLink {
       align-items: center;
-      border-radius: 8px;
+      border-radius: 4px;
       box-sizing: border-box;
       color: inherit;
       display: flex;
@@ -22,6 +22,7 @@ export const BookmarkLink = ({ bookmark }) => {
       background: var(--highlight-background);
       color: var(--highlight);
       font-weight: bolder;
+      text-decoration: underline;
     }
 
     .BookmarkLink_label {
