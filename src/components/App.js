@@ -28,7 +28,6 @@ export const App = () => {
       right: 0;
       top: 0;
       z-index: 10;
-      overflow-y: scroll;
     }
   `);
 

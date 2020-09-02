@@ -19,7 +19,7 @@ export const Bookmarks = () => {
       flex-direction: column;
       align-items: flex-end;
       background: var(--background);
-      overflow-y: auto;
+      overflow-y: scroll;
       height: 100%;
       width: var(--bookmarks-width);
       border-left: solid thin transparent;
@@ -34,7 +34,7 @@ export const Bookmarks = () => {
     }
 
     .Bookmarks:hover {
-      box-shadow: 0 0 100px var(--shadow-color);
+      box-shadow: 0 0 50px var(--shadow-color);
       border-left-color: var(--border-color);
       transition: border-left-color ease var(--transition-duration) calc(var(--transition-duration) / 3),
         box-shadow ease var(--transition-duration) calc(var(--transition-duration) / 3),
