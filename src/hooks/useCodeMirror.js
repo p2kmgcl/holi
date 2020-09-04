@@ -7,6 +7,7 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
       const nextEditor = CodeMirror.fromTextArea(element, {
         value: '',
         mode: 'markdown',
+        keyMap: 'sublime',
         theme: 'idea',
         lineWrapping: true,
       });
@@ -55,7 +56,7 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
             { line, ch: toCh },
             getElementForText
           );
-        } else if (change.origin === 'paste') {
+        } else if (change.origin === 'paste' || change.origin === '+swapLine') {
           doc.eachLine(
             change.from.line,
             change.to.line + change.text.length,
