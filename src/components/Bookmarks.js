@@ -15,9 +15,6 @@ export const Bookmarks = () => {
 
   useCSS(`
     .Bookmarks {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
       background: var(--background);
       overflow-y: scroll;
       height: 100%;

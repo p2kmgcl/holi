@@ -7,6 +7,7 @@ export const BookmarkCategory = ({ bookmark }) => {
       overflow: hidden;
       margin: 1.5rem 0.75rem 0.25rem auto;
       max-width: 3ch;
+      text-align: right;
       transition: max-width ease var(--transition-duration);
       will-change: max-width;
     }
