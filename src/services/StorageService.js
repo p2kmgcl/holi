@@ -4,6 +4,7 @@ const storage = chrome.storage.sync;
 const currentVersion = 3;
 
 const STORE_KEY = `holi${currentVersion}`;
+const STORE_LOCAL_KEY = `${STORE_KEY}local`;
 const SYNC_DATE_KEY = 'date';
 const SYNC_DELAY = 1000;
 
@@ -87,6 +88,20 @@ export const StorageService = {
     });
   },
 
+  getLocal(key) {
+    const value = localStorage.getItem(`${STORE_LOCAL_KEY}${key}`);
+
+    if (value !== null) {
+      try {
+        return JSON.parse(value);
+      } catch (error) {
+        return value;
+      }
+    }
+
+    return null;
+  },
+
   set(key, value) {
     clearTimeout(_syncTimeoutId);
     _syncData = { ..._syncData, [SYNC_DATE_KEY]: Date.now(), [key]: value };
@@ -102,5 +117,9 @@ export const StorageService = {
         }
       });
     }, SYNC_DELAY);
+  },
+
+  setLocal(key, value) {
+    localStorage.setItem(`${STORE_LOCAL_KEY}${key}`, JSON.stringify(value));
   },
 };
