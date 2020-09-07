@@ -28,11 +28,24 @@ export const Editor = () => {
       background: var(--background);
       font-family: inherit;
       height: 100%;
+      overflow: visible;
+    }
+
+    .Editor_mirror .CodeMirror-scroll {
+      overflow: visible !important;
     }
 
     .Editor_mirror .CodeMirror-cursor {
       border-left: solid 1ch var(--color);
       opacity: 0.5;
+    }
+
+    .Editor_mirror pre.CodeMirror-line  {
+      z-index: 0;
+    }
+
+    .Editor_mirror pre.CodeMirror-line:hover {
+      z-index: 2;
     }
 
     .Editor_mirror a {
@@ -69,7 +82,9 @@ export const Editor = () => {
     }
 
     .Editor_mirror .editor-element_github-pull-request .status-description {
+      display: inline-block;
       position: relative;
+      transform: translateZ(0);
     }
 
     .Editor_mirror .editor-element_github-pull-request .status-description:hover::after {
@@ -86,6 +101,7 @@ export const Editor = () => {
       box-shadow: 0 0 1rem var(--shadow-color);
       border-radius: 4px;
       pointer-events: none;
+      font-size: 0.875rem;
       z-index: 1000;
     }
 
