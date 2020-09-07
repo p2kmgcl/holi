@@ -68,6 +68,27 @@ export const Editor = () => {
       max-height: 1rem;
     }
 
+    .Editor_mirror .editor-element_github-pull-request .status-description {
+      position: relative;
+    }
+
+    .Editor_mirror .editor-element_github-pull-request .status-description:hover::after {
+      content: attr(data-status-description);
+      display: block;
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      white-space: pre;
+      padding: 0.5rem;
+      background: var(--highlight-background);
+      color: var(--highlight);
+      border: solid thin var(--border-color);
+      box-shadow: 0 0 1rem var(--shadow-color);
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
     .Editor_mirror .cm-header-1 {
       display: inline-block;
       border-bottom: solid 4px;
