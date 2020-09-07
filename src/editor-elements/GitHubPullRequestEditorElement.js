@@ -1,11 +1,17 @@
 import { BaseEditorElement } from './BaseEditorElement.js';
 import { FetchService } from '../services/FetchService.js';
 
+const STATUSES = {
+  unknown: 'unknown',
+  success: 'success',
+  failure: 'failure',
+  pending: 'pending',
+};
+
 const STATUS_TO_EMOJI = {
-  unknown: '🤷‍♀️',
-  success: '🎉',
-  error: '😵',
-  pending: '🏃',
+  [STATUSES.success]: '🎉',
+  [STATUSES.failure]: '💀',
+  [STATUSES.pending]: '🏃',
 };
 
 export class GitHubPullRequestEditorElement extends BaseEditorElement {
@@ -34,7 +40,7 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
       )
       .then((statuses) => {
         const mergedStatuses = {};
-        let status = 'unknown';
+        let status = STATUSES.unknown;
 
         statuses
           .sort(
@@ -47,25 +53,31 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
           });
 
         Object.values(mergedStatuses).forEach((mergedStatusValue) => {
-          if (status === 'error' || mergedStatusValue === 'error') {
-            status = 'error';
+          if (
+            status === STATUSES.failure ||
+            mergedStatusValue === STATUSES.failure
+          ) {
+            status = STATUSES.failure;
             return;
           }
 
-          if (status === 'pending' || mergedStatusValue === 'pending') {
-            status = 'pending';
+          if (
+            status === STATUSES.pending ||
+            mergedStatusValue === STATUSES.pending
+          ) {
+            status = STATUSES.pending;
             return;
           }
 
-          if (mergedStatusValue === 'success') {
-            status = 'success';
+          if (mergedStatusValue === STATUSES.success) {
+            status = STATUSES.success;
           }
         });
 
         anchor.innerHTML = `
           ${
-            status === 'unknown'
-              ? `<span>${STATUS_TO_EMOJI[status]}</span>`
+            status === STATUSES.unknown
+              ? ''
               : `<span class="status-description" data-status-description="${Object.entries(
                   mergedStatuses
                 )
