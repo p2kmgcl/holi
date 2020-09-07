@@ -35,7 +35,7 @@ like [Screely](https://www.screely.com/editor) (from a `1280x688` screenshot, wi
 - [CodeMirror](https://codemirror.net/)
 - [emojilib](https://github.com/muan/emojilib)
 - [HTM](https://github.com/developit/htm)
-- [Preact](https://preactjs.com/)
+- [React](https://reactjs.org//)
 
 ## Support
 

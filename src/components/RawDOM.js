@@ -1,4 +1,4 @@
-export class RawDOM extends preact.Component {
+export class RawDOM extends Component {
   shouldComponentUpdate() {
     return false;
   }

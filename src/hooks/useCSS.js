@@ -1,4 +1,4 @@
-const CSSContext = preact.createContext();
+const CSSContext = createContext();
 
 export const CSSContextProvider = ({ children }) => {
   const [styleNode, setStyleNode] = useState(null);

@@ -9,5 +9,5 @@ document.head.querySelector('title').innerText = I18NService.get('newTab');
 Promise.all([StorageService.init(), FetchService.init()]).then(() => {
   const app = document.getElementById('app');
   app.classList.remove('loading');
-  preact.render(html`<${CSSContextProvider}><${App} /><//>`, app);
+  ReactDOM.render(html`<${CSSContextProvider}><${App} /><//>`, app);
 });
