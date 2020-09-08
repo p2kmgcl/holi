@@ -70,14 +70,12 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
         if (status === STATUSES.unknown) {
           anchor.innerText = label;
         } else {
-          const statusDescription = document.createElement('span');
-          statusDescription.classList.add('status-description');
-          statusDescription.dataset.statusDescription = Object.entries(
-            mergedStatuses
-          )
-            .map(([context, value]) => `${STATUS_TO_EMOJI[value]} ${context}`)
-            .join('\n');
-          statusDescription.innerText = `${STATUS_TO_EMOJI[status]} `;
+          const statusDescription = GitHubPullRequestEditorElement.getEditorTooltipHTMLElement(
+            STATUS_TO_EMOJI[status],
+            Object.entries(mergedStatuses)
+              .map(([context, value]) => `${STATUS_TO_EMOJI[value]} ${context}`)
+              .join('\n')
+          );
 
           const statusText = document.createElement('span');
           statusText.innerText = label;

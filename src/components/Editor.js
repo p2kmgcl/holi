@@ -87,7 +87,7 @@ export const Editor = () => {
       text-decoration: line-through;
     }
 
-    .Editor_mirror .editor-element_github-pull-request .status-description {
+    .Editor_mirror .editor-tooltip {
       display: inline-block;
       position: relative;
       transform: translateZ(0);
@@ -95,8 +95,8 @@ export const Editor = () => {
       white-space: pre;
     }
 
-    .Editor_mirror .editor-element_github-pull-request .status-description:hover::after {
-      content: attr(data-status-description);
+    .Editor_mirror .editor-tooltip:hover::after {
+      content: attr(data-title);
       display: block;
       position: absolute;
       bottom: 1rem;
