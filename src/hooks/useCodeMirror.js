@@ -1,3 +1,6 @@
+import { StorageService } from '../services/StorageService.js';
+import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
+
 export const useCodeMirror = (value, setValue, getElementForText) => {
   const [element, setElement] = useState(null);
   const [editor, setEditor] = useState(null);
@@ -11,6 +14,14 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
         theme: 'idea',
         lineWrapping: true,
       });
+
+      const history = StorageService.getLocal(STORAGE_KEYS.editorHistory);
+
+      try {
+        nextEditor.getDoc().setHistory(history);
+      } catch (error) {
+        nextEditor.getDoc().setHistory({ done: [], undone: [] });
+      }
 
       setEditor(nextEditor);
 
@@ -30,7 +41,15 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
         }
 
         const doc = editor.getDoc();
-        setValue(doc.getValue());
+        const docValue = doc.getValue();
+
+        setValue(docValue);
+
+        StorageService.setLocal(STORAGE_KEYS.editorHistory, doc.getHistory());
+        StorageService.setLocal(STORAGE_KEYS.editorBackup, {
+          date: Date.now(),
+          text: docValue,
+        });
 
         if (
           change.origin === '+input' &&
@@ -80,7 +99,9 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
 
       if (!prevValue) {
         const { done, undone } = doc.getHistory();
-        doc.setHistory({ done: done.slice(0, done.length - 2), undone });
+        const history = { done: done.slice(0, done.length - 2), undone };
+        doc.setHistory(history);
+        StorageService.setLocal(STORAGE_KEYS.editorHistory, history);
       }
     }
   }, [editor, value, getElementForText]);
