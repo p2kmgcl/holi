@@ -25,6 +25,11 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--border-color);
+  transition: background-color ease var(--transition-duration);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color);
 }
 
 @media (prefers-reduced-motion: reduce) {
