@@ -57,27 +57,15 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
             mergedStatuses[status.context] = status.state;
           });
 
-        Object.values(mergedStatuses).forEach((mergedStatusValue) => {
-          if (
-            status === STATUSES.failure ||
-            mergedStatusValue === STATUSES.failure
-          ) {
-            status = STATUSES.failure;
-            return;
-          }
+        const mergedStatusesValues = Object.values(mergedStatuses);
 
-          if (
-            status === STATUSES.pending ||
-            mergedStatusValue === STATUSES.pending
-          ) {
-            status = STATUSES.pending;
-            return;
-          }
-
-          if (mergedStatusValue === STATUSES.success) {
-            status = STATUSES.success;
-          }
-        });
+        if (mergedStatusesValues.includes(STATUSES.failure)) {
+          status = STATUSES.failure;
+        } else if (mergedStatusesValues.includes(STATUSES.pending)) {
+          status = STATUSES.pending;
+        } else if (mergedStatusesValues.includes(STATUSES.success)) {
+          status = STATUSES.success;
+        }
 
         if (status === STATUSES.unknown) {
           anchor.innerText = label;
