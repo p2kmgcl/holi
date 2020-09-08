@@ -87,6 +87,8 @@ export const Editor = () => {
       display: inline-block;
       position: relative;
       transform: translateZ(0);
+      text-decoration: inherit;
+      white-space: pre;
     }
 
     .Editor_mirror .editor-element_github-pull-request .status-description:hover::after {

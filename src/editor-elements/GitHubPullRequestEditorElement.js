@@ -74,20 +74,25 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
           }
         });
 
-        anchor.innerHTML = `
-          ${
-            status === STATUSES.unknown
-              ? ''
-              : `<span class="status-description" data-status-description="${Object.entries(
-                  mergedStatuses
-                )
-                  .map(
-                    ([context, value]) => `${STATUS_TO_EMOJI[value]} ${context}`
-                  )
-                  .join('\n')}">${STATUS_TO_EMOJI[status]}</span>`
-          }
-          ${label}
-        `;
+        if (status === STATUSES.unknown) {
+          anchor.innerText = label;
+        } else {
+          const statusDescription = document.createElement('span');
+          statusDescription.classList.add('status-description');
+          statusDescription.dataset.statusDescription = Object.entries(
+            mergedStatuses
+          )
+            .map(([context, value]) => `${STATUS_TO_EMOJI[value]} ${context}`)
+            .join('\n');
+          statusDescription.innerText = `${STATUS_TO_EMOJI[status]} `;
+
+          const statusText = document.createElement('span');
+          statusText.innerText = label;
+
+          anchor.innerHTML = '';
+          anchor.appendChild(statusDescription);
+          anchor.appendChild(statusText);
+        }
 
         getMark().changed();
       });
