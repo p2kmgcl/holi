@@ -59,12 +59,14 @@ export const Editor = () => {
 
     .Editor_mirror .editor-element_checkbox {
       background: var(--shadow-color);
-      width: 0.8rem;
-      height: 0.8rem;
+      width: 1rem;
+      height: 1rem;
       margin: 0;
       appearance: none;
-      vertical-align: baseline;
-      border: solid thin var(--border-color);
+      vertical-align: middle;
+      border: solid 2px var(--border-color);
+      box-sizing: border-box;
+      font-size: 1rem;
       cursor: pointer;
       border-radius: 2px;
       transition: background ease var(--transition-duration);
