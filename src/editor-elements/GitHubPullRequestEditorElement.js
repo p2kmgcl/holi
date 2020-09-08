@@ -35,9 +35,14 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
     FetchService.getCachedJSON(
       `https://api.github.com/repos/${owner}/${repo}/pulls/${pullNumber}`
     )
-      .then((pullRequest) =>
-        FetchService.getCachedJSON(pullRequest.statuses_url)
-      )
+      .then((pullRequest) => {
+        anchor.classList.toggle(
+          'editor-element_github-pull-request--closed',
+          pullRequest.state === 'closed'
+        );
+
+        return FetchService.getCachedJSON(pullRequest.statuses_url);
+      })
       .then((statuses) => {
         const mergedStatuses = {};
         let status = STATUSES.unknown;

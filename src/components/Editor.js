@@ -83,6 +83,10 @@ export const Editor = () => {
       max-height: 1rem;
     }
 
+    .Editor_mirror .editor-element_github-pull-request--closed {
+      text-decoration: line-through;
+    }
+
     .Editor_mirror .editor-element_github-pull-request .status-description {
       display: inline-block;
       position: relative;
