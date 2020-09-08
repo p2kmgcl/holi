@@ -72,10 +72,16 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
 
   useLayoutEffect(() => {
     const doc = editor?.getDoc();
+    const prevValue = doc?.getValue();
 
-    if (doc && doc.getValue() !== value) {
+    if (doc && prevValue !== value) {
       doc.setValue(value);
       doc.eachLine((line) => parseLine(doc, line, getElementForText));
+
+      if (!prevValue) {
+        const { done, undone } = doc.getHistory();
+        doc.setHistory({ done: done.slice(0, done.length - 2), undone });
+      }
     }
   }, [editor, value, getElementForText]);
 
