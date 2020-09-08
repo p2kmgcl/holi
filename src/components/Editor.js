@@ -120,7 +120,7 @@ export const Editor = () => {
     }
 
     .Editor_mirror .CodeMirror-selected {
-      background-color: var(--highlight-background);
+      background-color: var(--shadow-color);
     }
   `);
 
