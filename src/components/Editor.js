@@ -3,11 +3,10 @@ import { useCSS } from '../hooks/useCSS.js';
 import { useStorage } from '../hooks/useStorage.js';
 import { useCodeMirror } from '../hooks/useCodeMirror.js';
 import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
-import { EDITOR_ELEMENTS } from '../constants/EDITOR_ELEMENTS.js';
 
 export const Editor = () => {
   const [value, setValue] = useStorage(STORAGE_KEYS.text, '');
-  const elementRef = useCodeMirror(value, setValue, getElementForText);
+  const [elementRef, portals] = useCodeMirror(value, setValue);
 
   useCSS(`
     .Editor {
@@ -48,70 +47,8 @@ export const Editor = () => {
       z-index: 2;
     }
 
-    .Editor_mirror a {
-      color: var(--highlight);
-      white-space: initial;
-    }
-
-    .Editor_mirror a:hover {
-      background: var(--highlight-background);
-    }
-
-    .Editor_mirror .editor-element_checkbox {
-      background: var(--background-color);
-      width: 1rem;
-      height: 1rem;
-      margin: 0;
-      appearance: none;
-      vertical-align: middle;
-      border: solid 2px var(--border-color);
-      box-sizing: border-box;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: background ease var(--transition-duration);
-      will-change: transition;
-      outline: none;
-    }
-
-    .Editor_mirror .editor-element_checkbox:checked {
-      background: var(--highlight);
-    }
-
-    .Editor_mirror .editor-element_emoji {
+    .Editor_mirror .editor-element-wrapper {
       display: inline-block;
-      max-height: 1rem;
-    }
-
-    .Editor_mirror .editor-element_jira-issue--closed,
-    .Editor_mirror .editor-element_github-pull-request--closed {
-      text-decoration: line-through;
-    }
-
-    .Editor_mirror .editor-tooltip {
-      display: inline-block;
-      position: relative;
-      transform: translateZ(0);
-      text-decoration: inherit;
-      white-space: pre;
-    }
-
-    .Editor_mirror .editor-tooltip:hover::after {
-      content: attr(data-title);
-      display: block;
-      position: absolute;
-      bottom: 1rem;
-      left: 0;
-      white-space: pre;
-      padding: 0.5rem;
-      background: var(--highlight-background);
-      color: var(--highlight);
-      border: solid thin var(--border-color);
-      box-shadow: 0 0 1rem var(--shadow-color);
-      border-radius: 4px;
-      pointer-events: none;
-      font-size: 0.875rem;
-      z-index: 1000;
     }
 
     .Editor_mirror .cm-header-1 {
@@ -137,17 +74,10 @@ export const Editor = () => {
         tagName="textarea"
         placeholder="Lorem ipsum dolor sit amet."
       />
+
+      ${portals.map((portal) =>
+        createPortal(html`<${portal.component} />`, portal.element)
+      )}
     </div>
   </div>`;
 };
-
-function getElementForText(text, updateMark) {
-  for (const EditorElement of EDITOR_ELEMENTS) {
-    if (EditorElement.regexp.test(text)) {
-      const element = EditorElement.getElement(text, updateMark);
-      element.classList.add('editor-element');
-      element.classList.add(`editor-element_${EditorElement.name}`);
-      return element;
-    }
-  }
-}

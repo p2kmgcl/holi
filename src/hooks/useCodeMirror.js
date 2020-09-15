@@ -1,9 +1,50 @@
 import { StorageService } from '../services/StorageService.js';
 import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
+import { EDITOR_ELEMENTS } from '../constants/EDITOR_ELEMENTS.js';
 
-export const useCodeMirror = (value, setValue, getElementForText) => {
+export const useCodeMirror = (value, setValue) => {
   const [element, setElement] = useState(null);
   const [editor, setEditor] = useState(null);
+  const [portals, setPortals] = useState([]);
+
+  const getElementForText = useCallback((text, getMarker) => {
+    const Component = EDITOR_ELEMENTS.find((EditorElement) =>
+      EditorElement.regexp.test(text)
+    );
+
+    if (Component) {
+      const element = document.createElement('div');
+      element.classList.add('editor-element-wrapper');
+      element.classList.add(`editor-element-wrapper--${Component.name}`);
+
+      requestAnimationFrame(() => {
+        const marker = getMarker();
+        const matches = Component.regexp.exec(text).slice(1);
+
+        setPortals((prevPortals) => [
+          ...prevPortals.filter((portal) =>
+            document.body.contains(portal.element)
+          ),
+          {
+            element,
+            component: () => {
+              useLayoutEffect(() => {
+                marker.changed();
+              });
+
+              return html`<${Component}
+                marker=${marker}
+                matches=${matches}
+                text=${text}
+              />`;
+            },
+          },
+        ]);
+      });
+
+      return element;
+    }
+  }, []);
 
   useEffect(() => {
     if (element) {
@@ -106,7 +147,7 @@ export const useCodeMirror = (value, setValue, getElementForText) => {
     }
   }, [editor, value, getElementForText]);
 
-  return setElement;
+  return [setElement, portals];
 };
 
 const addMarks = (doc, from, to, getElementForText) => {

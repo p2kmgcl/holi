@@ -1,5 +1,6 @@
-import { BaseEditorElement } from './BaseEditorElement.js';
 import { FetchService } from '../services/FetchService.js';
+import { EditorLink } from './EditorLink.js';
+import { EditorTooltip } from './EditorTooltip.js';
 
 const STATUSES = {
   unknown: 'unknown',
@@ -14,33 +15,18 @@ const STATUS_TO_EMOJI = {
   [STATUSES.pending]: '🏃',
 };
 
-export class GitHubPullRequestEditorElement extends BaseEditorElement {
-  static name = 'github-pull-request';
-  static regexp = /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/pull\/([0-9]+)\/?/i;
+export const GitHubPullRequestEditorElement = ({ matches, text: url }) => {
+  const [owner, repo, pullNumber] = matches;
+  const label = `${owner}/${repo}/pull/${pullNumber}`;
+  const [closed, setClosed] = useState(false);
+  const [status, setStatus] = useState(null);
 
-  static getElement(text, getMark) {
-    const anchor = document.createElement('a');
-    const [
-      ,
-      owner,
-      repo,
-      pullNumber,
-    ] = GitHubPullRequestEditorElement.regexp.exec(text);
-
-    const label = `${owner}/${repo}/pull/${pullNumber}`;
-
-    anchor.href = text;
-    anchor.innerText = label;
-
+  useEffect(() => {
     FetchService.getCachedJSON(
       `https://api.github.com/repos/${owner}/${repo}/pulls/${pullNumber}`
     )
       .then((pullRequest) => {
-        anchor.classList.toggle(
-          'editor-element_github-pull-request--closed',
-          pullRequest.state === 'closed'
-        );
-
+        setClosed(pullRequest.state === 'closed');
         return FetchService.getCachedJSON(pullRequest.statuses_url);
       })
       .then((statuses) => {
@@ -67,27 +53,22 @@ export class GitHubPullRequestEditorElement extends BaseEditorElement {
           status = STATUSES.success;
         }
 
-        if (status === STATUSES.unknown) {
-          anchor.innerText = label;
-        } else {
-          const statusDescription = GitHubPullRequestEditorElement.getEditorTooltipHTMLElement(
-            STATUS_TO_EMOJI[status],
-            Object.entries(mergedStatuses)
+        if (status !== STATUSES.unknown) {
+          setStatus({
+            label: STATUS_TO_EMOJI[status],
+            tooltip: Object.entries(mergedStatuses)
               .map(([context, value]) => `${STATUS_TO_EMOJI[value]} ${context}`)
-              .join('\n')
-          );
-
-          const statusText = document.createElement('span');
-          statusText.innerText = label;
-
-          anchor.innerHTML = '';
-          anchor.appendChild(statusDescription);
-          anchor.appendChild(statusText);
+              .join('\n'),
+          });
         }
-
-        getMark().changed();
       });
+  }, [pullNumber, owner, repo]);
 
-    return anchor;
-  }
-}
+  return html`<${EditorLink} closed=${closed}>
+    ${status &&
+    html`<${EditorTooltip} label=${status.label} tooltip=${status.tooltip} />`}
+    ${label}
+  <//>`;
+};
+
+GitHubPullRequestEditorElement.regexp = /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/pull\/([0-9]+)\/?/i;
