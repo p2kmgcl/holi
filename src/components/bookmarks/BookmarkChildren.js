@@ -6,7 +6,7 @@ export const BookmarkChildren = ({ bookmark }) => {
     (child) =>
       html`<${getBookmarkComponent(child)}
         bookmark=${child}
-        key=${bookmark.id}
+        key="${child.parentId}-${child.id}"
       />`
   );
 };

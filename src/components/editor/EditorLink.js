@@ -17,7 +17,7 @@ export const EditorLink = ({ children, href, closed }) => {
   `);
 
   return html`<a
-    class="EditorLink ${closed ? 'EditorLink--closed' : ''}"
+    className="EditorLink ${closed ? 'EditorLink--closed' : ''}"
     href=${href}
   >
     ${children}

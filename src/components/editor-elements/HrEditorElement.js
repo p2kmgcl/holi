@@ -7,7 +7,7 @@ export const HrEditorElement = () => {
     }
   `);
 
-  return html`<hr class="HrEditorElement" />`;
+  return html`<hr className="HrEditorElement" />`;
 };
 
 HrEditorElement.regexp = /^---$/;

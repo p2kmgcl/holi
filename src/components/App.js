@@ -32,12 +32,12 @@ export const App = () => {
   `);
 
   return html`
-    <div class="App">
-      <div class="App_editor">
+    <div className="App">
+      <div className="App_editor">
         <${Editor} />
       </div>
 
-      <div class="App_bookmarks">
+      <div className="App_bookmarks">
         <${Bookmarks} />
       </div>
     </div>

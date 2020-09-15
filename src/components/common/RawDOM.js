@@ -7,7 +7,7 @@ export class RawDOM extends Component {
     const { className, children, elementRef, tagName, ...rest } = this.props;
 
     return html`<${tagName || 'div'}
-      class=${className || ''}
+      className=${className || ''}
       ref=${elementRef}
       ...${rest}
     >

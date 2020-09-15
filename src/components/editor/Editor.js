@@ -66,8 +66,8 @@ export const Editor = () => {
     }
   `);
 
-  return html`<div class="Editor">
-    <div class="Editor_mirror">
+  return html`<div className="Editor">
+    <div className="Editor_mirror">
       <${RawDOM}
         className="Editor_textarea"
         elementRef=${elementRef}

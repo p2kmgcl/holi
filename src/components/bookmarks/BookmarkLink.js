@@ -36,16 +36,16 @@ export const BookmarkLink = ({ bookmark }) => {
 
   return html`
     <${Placeholder} height="calc(16px + 1rem)" width="100%">
-      <a class="BookmarkLink" href=${bookmark.url}>
+      <a className="BookmarkLink" href=${bookmark.url}>
         <img
-          class="BookmarkLink_image"
+          className="BookmarkLink_image"
           src="chrome://favicon/${bookmark.url}"
           alt=""
           width="16"
           height="16"
         />
 
-        <span class="BookmarkLink_label">
+        <span className="BookmarkLink_label">
           ${bookmark.title}
         </span>
       </a>

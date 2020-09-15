@@ -43,7 +43,7 @@ export const Bookmarks = () => {
   `);
 
   return html`
-    <div class="Bookmarks">
+    <div className="Bookmarks">
       <${BookmarkChildren} bookmark=${bookmarkBar} />
     </div>
   `;

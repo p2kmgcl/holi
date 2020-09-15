@@ -30,10 +30,11 @@ export const BookmarkCategory = ({ bookmark }) => {
     }
   `);
 
-  return html`
-    <div class="BookmarkCategory">
-      <h1 class="BookmarkCategory_title">${bookmark.title}</h1>
+  return html`<div>
+    <div className="BookmarkCategory">
+      <h1 className="BookmarkCategory_title">${bookmark.title}</h1>
     </div>
+
     <${BookmarkChildren} bookmark=${bookmark} />
-  `;
+  </div>`;
 };

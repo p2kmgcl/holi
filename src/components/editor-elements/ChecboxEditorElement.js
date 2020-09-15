@@ -38,7 +38,7 @@ export const CheckBoxEditorElement = ({ marker, matches }) => {
   `);
 
   return html`<input
-    class="CheckboxEditorElement"
+    className="CheckboxEditorElement"
     checked=${checked}
     onChange=${handleChange}
     type="checkbox"

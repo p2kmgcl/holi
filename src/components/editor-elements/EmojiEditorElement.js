@@ -18,7 +18,7 @@ export const EmojiEditorElement = ({ marker, matches }) => {
     }
   `);
 
-  return html`<span class="EmojiEditorElement"
+  return html`<span className="EmojiEditorElement"
     >${emoji || `:${keyword}:`}</span
   >`;
 };

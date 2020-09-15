@@ -29,7 +29,7 @@ export const EditorTooltip = ({ label, tooltip }) => {
     }
   `);
 
-  return html`<span class="EditorTooltip" data-title=${tooltip}>
+  return html`<span className="EditorTooltip" data-title=${tooltip}>
     ${label}${' '}
   </span>`;
 };
