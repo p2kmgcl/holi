@@ -1,4 +1,4 @@
-import { EditorLink } from './EditorLink.js';
+import { EditorLink } from '../editor/EditorLink.js';
 
 export const LinkEditorElement = ({ text, matches }) =>
   html`<${EditorLink} href=${text}>${matches[0]}<//>`;

@@ -1,6 +1,6 @@
-import { FetchService } from '../services/FetchService.js';
-import { EditorTooltip } from './EditorTooltip.js';
-import { EditorLink } from './EditorLink.js';
+import { FetchService } from '../../services/FetchService.js';
+import { EditorTooltip } from '../editor/EditorTooltip.js';
+import { EditorLink } from '../editor/EditorLink.js';
 
 const CLOSED_EMOJI = '🎉';
 const OPEN_EMOJI = '🔮';

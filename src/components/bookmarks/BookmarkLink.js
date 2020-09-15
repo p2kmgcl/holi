@@ -1,5 +1,5 @@
-import { useCSS } from '../hooks/useCSS.js';
-import { Placeholder } from './Placeholder.js';
+import { useCSS } from '../../hooks/useCSS.js';
+import { Placeholder } from '../common/Placeholder.js';
 
 export const BookmarkLink = ({ bookmark }) => {
   useCSS(`

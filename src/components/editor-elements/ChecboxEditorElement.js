@@ -1,4 +1,4 @@
-import { useCSS } from '../hooks/useCSS.js';
+import { useCSS } from '../../hooks/useCSS.js';
 
 export const CheckBoxEditorElement = ({ marker, matches }) => {
   const checked = matches[0].toLowerCase() === 'x';

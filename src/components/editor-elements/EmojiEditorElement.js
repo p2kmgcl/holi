@@ -1,5 +1,5 @@
-import { EmojiService } from '../services/EmojiService.js';
-import { useCSS } from '../hooks/useCSS.js';
+import { EmojiService } from '../../services/EmojiService.js';
+import { useCSS } from '../../hooks/useCSS.js';
 
 export const EmojiEditorElement = ({ marker, matches }) => {
   const [keyword] = matches;

@@ -1,8 +1,8 @@
-import { RawDOM } from './RawDOM.js';
-import { useCSS } from '../hooks/useCSS.js';
-import { useStorage } from '../hooks/useStorage.js';
-import { useCodeMirror } from '../hooks/useCodeMirror.js';
-import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
+import { RawDOM } from '../common/RawDOM.js';
+import { useCSS } from '../../hooks/useCSS.js';
+import { useStorage } from '../../hooks/useStorage.js';
+import { useCodeMirror } from '../../hooks/useCodeMirror.js';
+import { STORAGE_KEYS } from '../../constants/STORAGE_KEYS.js';
 
 export const Editor = () => {
   const [value, setValue] = useStorage(STORAGE_KEYS.text, '');

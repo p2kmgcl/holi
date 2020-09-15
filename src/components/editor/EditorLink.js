@@ -1,4 +1,4 @@
-import { useCSS } from '../hooks/useCSS.js';
+import { useCSS } from '../../hooks/useCSS.js';
 
 export const EditorLink = ({ children, href, closed }) => {
   useCSS(`

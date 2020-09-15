@@ -1,6 +1,6 @@
-import { Bookmarks } from './Bookmarks.js';
+import { Bookmarks } from './bookmarks/Bookmarks.js';
 import { useCSS } from '../hooks/useCSS.js';
-import { Editor } from './Editor.js';
+import { Editor } from './editor/Editor.js';
 
 export const App = () => {
   useCSS(`

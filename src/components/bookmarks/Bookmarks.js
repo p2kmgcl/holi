@@ -1,5 +1,5 @@
-import { BookmarkService } from '../services/BookmarkService.js';
-import { useCSS } from '../hooks/useCSS.js';
+import { BookmarkService } from '../../services/BookmarkService.js';
+import { useCSS } from '../../hooks/useCSS.js';
 import { BookmarkChildren } from './BookmarkChildren.js';
 
 export const Bookmarks = () => {

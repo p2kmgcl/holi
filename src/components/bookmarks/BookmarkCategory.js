@@ -1,5 +1,5 @@
 import { BookmarkChildren } from './BookmarkChildren.js';
-import { useCSS } from '../hooks/useCSS.js';
+import { useCSS } from '../../hooks/useCSS.js';
 
 export const BookmarkCategory = ({ bookmark }) => {
   useCSS(`

@@ -1,6 +1,6 @@
-import { FetchService } from '../services/FetchService.js';
-import { EditorLink } from './EditorLink.js';
-import { EditorTooltip } from './EditorTooltip.js';
+import { FetchService } from '../../services/FetchService.js';
+import { EditorLink } from '../editor/EditorLink.js';
+import { EditorTooltip } from '../editor/EditorTooltip.js';
 
 const STATUSES = {
   unknown: 'unknown',
