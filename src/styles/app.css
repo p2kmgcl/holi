@@ -1,0 +1,26 @@
+#app {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+#editor,
+#bookmarks {
+  height: 100%;
+}
+
+#editor {
+  flex-grow: 1;
+  margin-right: var(--bookmarks-width);
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#bookmarks {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}

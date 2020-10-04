@@ -1,0 +1,9 @@
+.editor-element--HrEditorElement {
+  display: inline-block;
+  width: 100%;
+  overflow: visible;
+  height: 1px;
+  border-style: dashed;
+  border-color: var(--border-color);
+  border-width: 2px 0 0 0;
+}

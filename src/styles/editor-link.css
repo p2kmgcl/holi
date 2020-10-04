@@ -1,0 +1,12 @@
+.editor-link {
+  color: var(--highlight);
+  white-space: initial;
+}
+
+.editor-link:hover {
+  background: var(--highlight-background);
+}
+
+.editor-link--closed {
+  text-decoration: line-through;
+}

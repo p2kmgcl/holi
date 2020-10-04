@@ -1,0 +1,55 @@
+#editorContent {
+  font-size: 1rem;
+  max-width: 90ch;
+  width: 100%;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+}
+
+#editorTextarea {
+  display: none;
+}
+
+#editorMirror .CodeMirror {
+  color: var(--color);
+  background: var(--background);
+  font-family: inherit;
+  height: 100%;
+  overflow: visible;
+}
+
+#editorMirror .CodeMirror-scroll {
+  overflow: visible !important;
+}
+
+#editorMirror .CodeMirror-cursor {
+  border-left: solid 2px var(--highlight);
+  opacity: 0.8;
+}
+
+#editorMirror pre.CodeMirror-line {
+  z-index: 0;
+}
+
+#editorMirror pre.CodeMirror-line:hover {
+  z-index: 2;
+}
+
+#editorMirror .editor-element-wrapper {
+  display: inline-block;
+}
+
+#editorMirror .cm-header-1 {
+  display: inline-block;
+  border-bottom: solid 4px;
+  margin-bottom: 8px;
+}
+
+#editorMirror > .CodeMirror-empty {
+  opacity: 0.5;
+}
+
+#editorMirror .CodeMirror-selected {
+  background-color: var(--shadow-color);
+}

@@ -6,20 +6,65 @@
     <title>New tab</title>
 
     <link rel="stylesheet" href="../dependencies/codemirror-5.57.0.css" />
+
     <link rel="stylesheet" href="index.css" />
+
+    <link rel="stylesheet" href="styles/app.css" />
+    <link rel="stylesheet" href="styles/editor-link.css" />
+    <link rel="stylesheet" href="styles/editor-tooltip.css" />
+    <link rel="stylesheet" href="styles/loading-animation.css" />
+
+    <link rel="stylesheet" href="scripts/bookmarks.css" />
+    <link rel="stylesheet" href="scripts/editor.css" />
+
+    <link rel="stylesheet" href="editor-elements/CheckboxEditorElement.css" />
+    <link rel="stylesheet" href="editor-elements/HrEditorElement.css" />
   </head>
   <body>
-    <main id="app" class="loading"></main>
+    <main id="app" class="loading">
+      <div id="editor">
+        <div id="editorContent">
+          <div id="editorMirror">
+            <textarea
+              id="editorTextarea"
+              placeholder="Lorem ipsum dolor sit amet."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="bookmarks"></div>
+    </main>
+
+    <template id="bookmarkCategoryTemplate">
+      <li class="bookmark-category">
+        <h1 class="bookmark-category__label"></h1>
+        <ul class="bookmark-category__children"></ul>
+      </li>
+    </template>
+
+    <template id="bookmarkLinkTemplate">
+      <li class="bookmark-child">
+        <a class="bookmark-link">
+          <img
+            class="bookmark-link__image"
+            role="presentation"
+            alt=""
+            src=""
+            width="16"
+            height="16"
+          />
+
+          <span class="bookmark-link__label"></span>
+        </a>
+      </li>
+    </template>
 
     <script src="../dependencies/codemirror-5.57.0.js"></script>
     <script src="../dependencies/codemirror-sublime-keymap-5.57.0.js"></script>
     <script src="../dependencies/codemirror-placeholder-5.57.0.js"></script>
     <script src="../dependencies/codemirror-markdown-5.57.0.js"></script>
-    <script src="../dependencies/react-16.13.1.js"></script>
-    <script src="../dependencies/react-dom-16.13.1.js"></script>
-    <script src="../dependencies/htm-3.0.4.js"></script>
 
-    <script src="globals.js"></script>
     <script src="index.js" type="module"></script>
   </body>
 </html>

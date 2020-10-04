@@ -1,0 +1,20 @@
+.editor-element--CheckBoxEditorElement {
+  background: var(--background-color);
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  appearance: none;
+  vertical-align: middle;
+  border: solid 2px var(--border-color);
+  box-sizing: border-box;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background ease var(--transition-duration);
+  will-change: transition;
+  outline: none;
+}
+
+.editor-element--CheckBoxEditorElement:checked {
+  background: var(--highlight);
+}

@@ -1,0 +1,85 @@
+#bookmarks {
+  background: var(--background);
+  overflow-y: scroll;
+  height: 100%;
+  width: var(--bookmarks-width);
+  border-left: solid thin transparent;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: border-left-color ease var(--transition-duration),
+    box-shadow ease var(--transition-duration),
+    width ease var(--transition-duration),
+    opacity ease var(--transition-duration) var(--transition-duration);
+  opacity: 0.5;
+  will-change: border-left-color, box-shadow, width, opacity;
+}
+
+#bookmarks:hover {
+  box-shadow: 0 0 50px var(--shadow-color);
+  border-left-color: var(--border-color);
+  transition: border-left-color ease var(--transition-duration)
+      calc(var(--transition-duration) / 3),
+    box-shadow ease var(--transition-duration)
+      calc(var(--transition-duration) / 3),
+    width ease var(--transition-duration) calc(var(--transition-duration) / 3),
+    opacity ease calc(var(--transition-duration) / 3);
+  width: 40ch;
+  opacity: 1;
+}
+
+.bookmark-link {
+  align-items: center;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: inherit;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: background ease var(--transition-duration);
+  width: 100%;
+  will-change: background;
+}
+
+.bookmark-link:hover {
+  background: var(--highlight-background);
+  color: var(--highlight);
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.bookmark-link__label {
+  display: block;
+  flex-shrink: 1;
+  margin-right: 1ch;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bookmark-category {
+  overflow: hidden;
+  text-align: right;
+}
+
+.bookmark-category__label {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 1rem 1ch 0.5rem auto;
+  text-overflow: clip;
+  max-width: 2ch;
+  transition: max-width ease var(--transition-duration);
+  will-change: max-width;
+}
+
+.bookmark-category__children {
+  list-style: none;
+  padding-left: 0;
+}
+
+#bookmarks:hover .bookmark-category__label {
+  max-width: 80%;
+  text-overflow: ellipsis;
+}

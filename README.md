@@ -29,8 +29,6 @@ there is no build process, just make your changes and load the extension.
 
 - [CodeMirror](https://codemirror.net/)
 - [emojilib](https://github.com/muan/emojilib)
-- [HTM](https://github.com/developit/htm)
-- [React](https://reactjs.org//)
 
 ## Support
 
