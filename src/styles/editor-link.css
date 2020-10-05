@@ -10,3 +10,7 @@
 .editor-link--closed {
   text-decoration: line-through;
 }
+
+.editor-link span + span:before {
+  content: ' ';
+}
