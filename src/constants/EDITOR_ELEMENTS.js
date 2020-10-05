@@ -5,9 +5,11 @@ import { GitHubPullRequestEditorElement } from '../editor-elements/GitHubPullReq
 import { HrEditorElement } from '../editor-elements/HrEditorElement.js';
 import { JiraIssueEditorElement } from '../editor-elements/JiraIssueEditorElement.js';
 import { LinkEditorElement } from '../editor-elements/LinkEditorElement.js';
+import { GitHubRepoEditorElement } from '../editor-elements/GitHubRepoEditorElement.js';
 
 export const EDITOR_ELEMENTS = [
   GitHubPullRequestEditorElement,
+  GitHubRepoEditorElement,
   GitHubLinkEditorElement,
   JiraIssueEditorElement,
   LinkEditorElement,
