@@ -1,8 +1,9 @@
 .editor-element--GitHubRepoEditorElement {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   width: calc(100% - 1ch);
   box-sizing: border-box;
-  padding: 1rem 1ch;
+  padding: 1rem;
   margin-bottom: 1ch;
   border: solid 1px var(--border-color);
   border-radius: 4px;
@@ -31,6 +32,7 @@
 .editor-element--GitHubRepoEditorElement .issue {
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
 }
 
 .editor-element--GitHubRepoEditorElement .issue a {
