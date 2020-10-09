@@ -23,3 +23,8 @@
   font-size: 0.875rem;
   z-index: 1000;
 }
+
+.editor-tooltip--left:hover::after {
+  left: auto;
+  right: 0;
+}
