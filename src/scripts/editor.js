@@ -15,7 +15,7 @@ export const editor = async () => {
   });
 
   const doc = editor.getDoc();
-  doc.setValue(await StorageService.get(STORAGE_KEYS.text));
+  doc.setValue(await StorageService.get(STORAGE_KEYS.text) || '');
   doc.eachLine((line) => parseLine(doc, line));
 
   try {
