@@ -40,6 +40,13 @@ export const bookmarks = () => {
       renderChild(child, rootParent);
     });
 
-    document.getElementById('bookmarks').appendChild(rootParent);
+    const bookmarksElement = document.getElementById('bookmarks');
+
+    if (bookmarkBar.children.length) {
+      bookmarksElement.appendChild(rootParent);
+    } else {
+      bookmarksElement.parentElement.removeChild(bookmarksElement);
+      document.body.style.setProperty('--bookmarks-width', '0');
+    }
   });
 };
