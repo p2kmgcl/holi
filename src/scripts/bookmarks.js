@@ -18,9 +18,19 @@ export const bookmarks = () => {
         const link = bookmarkLinkTemplate.content.cloneNode(true);
         link.querySelector('.bookmark-link').href = child.url;
         link.querySelector('.bookmark-link__label').innerText = child.title;
-        link.querySelector(
-          '.bookmark-link__image'
-        ).src = `chrome://favicon/${child.url}`;
+
+        const linkImage = link.querySelector('.bookmark-link__image');
+
+        if (window.browser) {
+          const linkEmoji = document.createElement('span');
+          linkEmoji.className = linkImage.className;
+          linkEmoji.innerText = '🌐';
+
+          linkImage.replaceWith(linkEmoji);
+        } else {
+          linkImage.src = `chrome://favicon/${child.url}`;
+        }
+
         parent.appendChild(link);
       } else {
         const category = bookmarkCategoryTemplate.content.cloneNode(true);
