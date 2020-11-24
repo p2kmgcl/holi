@@ -1,6 +1,35 @@
 import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
 
-const storage = chrome.storage.sync;
+const warnStorageNotAvailable = () => {
+  console.warn(
+    'Warning: storage data is not available.\n' +
+    'Your editor information will not be synchronized and might be lost.\n' +
+    'Please add a bug ticket at https://github.com/p2kmgcl/holi/issues/new/choose'
+  );
+}
+
+const storage = window.browser?.storage?.sync || window.chrome?.storage?.sync || {
+  get: (key, handler) => {
+    warnStorageNotAvailable()
+    handler()
+  },
+
+  set: (data) => {
+    warnStorageNotAvailable()
+    return Promise.resolve();
+  },
+};
+
+const onStorageChanged = window.browser?.storage?.onChanged || window.chrome?.storage?.onChanged || {
+  addListener: (callback) => {
+    warnStorageNotAvailable()
+  },
+
+  removeListener: (callback) => {
+    warnStorageNotAvailable()
+  }
+}
+
 const currentVersion = 3;
 
 const STORE_KEY = `holi${currentVersion}`;
@@ -20,7 +49,7 @@ export const StorageService = {
     });
 
     const store = await new Promise((resolve) =>
-      storage.get(STORE_KEY, (data) => resolve(data[STORE_KEY]))
+      storage.get(STORE_KEY, (data) => resolve(data?.[STORE_KEY]))
     );
 
     if (!store) {
@@ -42,7 +71,7 @@ export const StorageService = {
       // Upgrade from v2
 
       value = await new Promise((resolve) => {
-        storage.get('HOLI_TEXT', (data) => resolve(data['HOLI_TEXT']));
+        storage.get('HOLI_TEXT', (data) => resolve(data?.['HOLI_TEXT']));
       });
 
       if (value) {
@@ -76,14 +105,14 @@ export const StorageService = {
       if (nextStore && origin === 'sync') fn(nextStore[key]);
     };
 
-    chrome.storage.onChanged.addListener(callback);
-    return () => chrome.storage.onChanged.removeListener(callback);
+    onStorageChanged.addListener(callback);
+    return () => onStorageChanged.removeListener(callback);
   },
 
   get(key) {
     return new Promise((resolve) => {
       storage.get(STORE_KEY, (data) => {
-        resolve(data[STORE_KEY]?.[key]);
+        resolve(data?.[STORE_KEY]?.[key]);
       });
     });
   },
