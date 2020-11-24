@@ -3,6 +3,11 @@
   "name": "Holi",
   "version": "2.5.2",
   "description": "__MSG_sayHiToYourNewTab__",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "holi@pablomolina.me"
+    }
+  },
   "default_locale": "en",
   "icons": {
     "128": "assets/icon-128.png",
