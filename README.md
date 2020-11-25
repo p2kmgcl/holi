@@ -4,7 +4,9 @@ Use holi to organize your thoughts in your new tab page or manage your bookmarks
 with a simple, minimal sidebar.
 
 ![Main application][1]<br />
-[![Download Holi from Chrome Web Store][7]][2]<br />
+
+[![Download Holi from Chrome Web Store][7]][2]
+[![Download Holi from Firefox Browser Add-ons][8]][9]
 
 ## Features
 
@@ -54,3 +56,4 @@ There is no build process, just make your changes and reload the extension.
 [6]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons
 [7]: https://raw.githubusercontent.com/p2kmgcl/holi/master/assets/chrome-badge.png
 [8]: https://raw.githubusercontent.com/p2kmgcl/holi/master/assets/firefox-badge.png
+[9]: https://addons.mozilla.org/es/firefox/addon/holi/
