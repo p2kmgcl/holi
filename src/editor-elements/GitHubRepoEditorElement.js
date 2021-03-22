@@ -121,7 +121,7 @@ export const GitHubRepoEditorElement = ({ matches, onRender }) => {
   return wrapper;
 };
 
-GitHubRepoEditorElement.regexp = /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/?/i;
+GitHubRepoEditorElement.regexp = /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/?$/i;
 
 function invertColor(hex) {
   if (hex.indexOf('#') === 0) {
