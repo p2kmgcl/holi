@@ -3,30 +3,42 @@
   flex-direction: column;
   width: calc(100% - 1ch);
   box-sizing: border-box;
-  padding: 1rem;
   margin-bottom: 1ch;
   border: solid 1px var(--border-color);
   border-radius: 4px;
   box-shadow: 1ch 1ch 0 0 var(--shadow-color);
+  overflow: hidden;
 }
 
 .editor-element--GitHubRepoEditorElement h1 {
   font-size: 1em;
   margin: 0;
   display: inline-block;
-  border-bottom: 4px solid;
+  background-color: var(--highlight-background);
+}
+
+.editor-element--GitHubRepoEditorElement h1 a {
+  color: inherit;
+  text-decoration: none;
+  padding: 1ch 1rem;
+  display: block;
 }
 
 .editor-element--GitHubRepoEditorElement .pr-list,
 .editor-element--GitHubRepoEditorElement .issue-list {
   list-style: none;
-  padding: 0;
+  padding: 0 1rem;
   margin: 0;
 }
 
 .editor-element--GitHubRepoEditorElement .pr-list:not(:empty),
 .editor-element--GitHubRepoEditorElement .issue-list:not(:empty) {
   margin-top: 1rem;
+}
+
+.editor-element--GitHubRepoEditorElement .pr-list:not(:empty) + .issue-list:empty,
+.editor-element--GitHubRepoEditorElement .pr-list:not(:empty) + .issue-list:not(:empty) {
+  margin-bottom: 1rem;
 }
 
 .editor-element--GitHubRepoEditorElement .issue {

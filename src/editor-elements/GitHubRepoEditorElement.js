@@ -27,7 +27,8 @@ export const GitHubRepoEditorElement = ({ matches, onRender }) => {
 
   const wrapper = document.createElement('div');
   wrapper.innerHTML = template;
-  wrapper.querySelector('h1').innerText = `# ${owner}/${repo}`;
+  wrapper.querySelector('h1').innerHTML =
+    `<a href="https://github.com/${owner}/${repo}"># ${owner}/${repo}</a>`;
 
   const prList = wrapper.querySelector('.pr-list');
   const issueList = wrapper.querySelector('.issue-list');
