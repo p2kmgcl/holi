@@ -4,18 +4,22 @@ import { EDITOR_ELEMENTS } from '../constants/EDITOR_ELEMENTS.js';
 
 export const editor = async () => {
   const textarea = document.getElementById('editorTextarea');
-  const wrapper = document.getElementById('editorMirror');
+
+  textarea.value = (() => {
+    const backup = StorageService.getLocal(STORAGE_KEYS.editorBackup);
+    return (backup && backup.text) || '';
+  })();
 
   const editor = CodeMirror.fromTextArea(textarea, {
-    value: '',
     mode: 'markdown',
     keyMap: 'sublime',
     theme: 'idea',
     lineWrapping: true,
+    readOnly: true,
   });
 
   const doc = editor.getDoc();
-  doc.setValue(await StorageService.get(STORAGE_KEYS.text) || '');
+  doc.setValue((await StorageService.get(STORAGE_KEYS.text)) || '');
   doc.eachLine((line) => parseLine(doc, line));
 
   try {
@@ -23,6 +27,8 @@ export const editor = async () => {
   } catch (error) {
     doc.setHistory({ done: [], undone: [] });
   }
+
+  editor.setOption('readOnly', false);
 
   StorageService.onChange(STORAGE_KEYS.text, (value) => {
     if (value !== doc.getValue()) {
