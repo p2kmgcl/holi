@@ -55,7 +55,15 @@ export const StorageService = {
     );
 
     if (!store) {
-      // Upgrade from v1
+      /*
+
+      Upgrade from v1
+
+      local: {
+        holi_editor: string
+      }
+
+      */
 
       let value = localStorage.getItem('holi_editor');
 
@@ -70,7 +78,17 @@ export const StorageService = {
         });
       }
 
-      // Upgrade from v2
+      /*
+
+      Upgrade from v2
+
+      sync: {
+        data: {
+          HOLI_TEXT: string
+        }
+      }
+
+      */
 
       value = await new Promise((resolve) => {
         storage.get('HOLI_TEXT', (data) => resolve(data?.['HOLI_TEXT']));
@@ -89,7 +107,26 @@ export const StorageService = {
         });
       }
 
-      // Store init
+      /*
+
+      Store init
+
+      local: {
+        holi3localeditorBackup: {date: number, text: string}
+        holi3localeditorHistory: Object
+        holi3localfetchServiceRequests: {expirationDate: number, data: Object, url: string}
+      }
+
+      sync: {
+        data: {
+          holi3: {
+            date: number
+            text: string
+          }
+        }
+      }
+
+      */
 
       return storage.set({
         [STORE_KEY]: {
