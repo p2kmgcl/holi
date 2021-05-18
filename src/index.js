@@ -7,16 +7,14 @@ import { EmojiService } from './services/EmojiService.js';
 
 document.head.querySelector('title').innerText = I18NService.get('newTab');
 
-Promise.all([
-  StorageService.init(),
-  FetchService.init(),
-  EmojiService.init(),
-]).then(() => {
-  const app = document.getElementById('app');
-  app.classList.remove('loading');
+Promise.all([StorageService.init(), FetchService.init(), EmojiService.init()])
+  .then(() => {
+    const app = document.getElementById('app');
+    app.classList.remove('loading');
 
-  bookmarks();
-  editor();
-}).catch(error => {
-  console.log(error)
-})
+    bookmarks();
+    editor();
+  })
+  .catch((error) => {
+    console.log(error);
+  });

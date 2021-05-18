@@ -9,7 +9,7 @@ export const EmojiService = {
           key,
           char: value.char,
           keywords: value.keywords,
-        }))
+        }));
       });
   },
 

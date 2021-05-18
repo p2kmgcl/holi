@@ -3,32 +3,34 @@ import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
 const warnStorageNotAvailable = () => {
   console.warn(
     'Warning: storage data is not available.\n' +
-    'Your editor information will not be synchronized and might be lost.\n' +
-    'Please add a bug ticket at https://github.com/p2kmgcl/holi/issues/new/choose'
+      'Your editor information will not be synchronized and might be lost.\n' +
+      'Please add a bug ticket at https://github.com/p2kmgcl/holi/issues/new/choose'
   );
-}
-
-const storage = window.browser?.storage?.sync || window.chrome?.storage?.sync || {
-  get: (key, handler) => {
-    warnStorageNotAvailable()
-    handler()
-  },
-
-  set: (data) => {
-    warnStorageNotAvailable()
-    return Promise.resolve();
-  },
 };
 
-const onStorageChanged = window.browser?.storage?.onChanged || window.chrome?.storage?.onChanged || {
-  addListener: (callback) => {
-    warnStorageNotAvailable()
-  },
+const storage = window.browser?.storage?.sync ||
+  window.chrome?.storage?.sync || {
+    get: (key, handler) => {
+      warnStorageNotAvailable();
+      handler();
+    },
 
-  removeListener: (callback) => {
-    warnStorageNotAvailable()
-  }
-}
+    set: (data) => {
+      warnStorageNotAvailable();
+      return Promise.resolve();
+    },
+  };
+
+const onStorageChanged = window.browser?.storage?.onChanged ||
+  window.chrome?.storage?.onChanged || {
+    addListener: (callback) => {
+      warnStorageNotAvailable();
+    },
+
+    removeListener: (callback) => {
+      warnStorageNotAvailable();
+    },
+  };
 
 const currentVersion = 3;
 
