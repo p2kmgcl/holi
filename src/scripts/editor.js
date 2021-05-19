@@ -1,4 +1,4 @@
-import { EDITOR_ELEMENTS } from '../constants/EDITOR_ELEMENTS.js';
+import { EDITOR_ELEMENTS } from '../editor-elements/index.js';
 import { EditorDataService } from '../services/EditorDataService.js';
 
 export const editor = async () => {
