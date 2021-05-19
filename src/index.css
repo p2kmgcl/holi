@@ -1,12 +1,16 @@
 html {
   --background: #fafafa;
-  --bookmarks-width: 5.5rem;
+  --bookmarks-width: 3.5rem;
   --color: #333;
   --highlight: #484;
   --highlight-background: #eee;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --border-color: #ccc;
   --transition-duration: 0.3s;
+}
+
+html {
+  font-size: 18px;
 }
 
 body {

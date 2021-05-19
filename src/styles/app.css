@@ -11,8 +11,9 @@
 
 #editor {
   flex-grow: 1;
-  margin-right: var(--bookmarks-width);
   width: 100vw;
+  padding: 4rem 1rem 4rem 1rem;
+  margin-right: var(--bookmarks-width);
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;

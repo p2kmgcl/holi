@@ -1,9 +1,9 @@
 #editorContent {
   font-size: 1rem;
+  line-height: 1.5;
   max-width: 90ch;
   width: 100%;
   margin: 0 auto;
-  padding: 4rem 2rem;
   box-sizing: border-box;
 }
 
