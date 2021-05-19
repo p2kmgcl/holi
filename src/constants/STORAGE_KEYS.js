@@ -1,6 +1,5 @@
 export const STORAGE_KEYS = {
-  text: 'text',
-  editorBackup: 'editorBackup',
-  editorHistory: 'editorHistory',
-  fetchServiceRequests: 'fetchServiceRequests',
+  editorBackup: 'EDITOR_BACKUP',
+  editorHistory: 'EDITOR_HISTORY',
+  fetchServiceRequests: 'FETCH_SERVICE_REQUESTS',
 };

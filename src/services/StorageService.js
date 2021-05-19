@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
+import { EditorDataService } from './EditorDataService.js';
 
 const warnStorageNotAvailable = () => {
   console.warn(
@@ -32,11 +32,11 @@ const onStorageChanged = window.browser?.storage?.onChanged ||
     },
   };
 
-const currentVersion = 3;
+const currentVersion = 4;
 
 const STORE_KEY = `holi${currentVersion}`;
-const STORE_LOCAL_KEY = `${STORE_KEY}local`;
-const SYNC_DATE_KEY = 'date';
+const STORE_LOCAL_KEY = `${STORE_KEY}_LOCAL`;
+const SYNC_DATE_KEY = 'DATE';
 const SYNC_DELAY = 1000;
 
 let _syncTimeoutId = null;
@@ -55,6 +55,8 @@ export const StorageService = {
     );
 
     if (!store) {
+      const editorId = 'migration-editor-' + Date.now().toString();
+
       /*
 
       Upgrade from v1
@@ -73,7 +75,9 @@ export const StorageService = {
         return await storage.set({
           [STORE_KEY]: {
             [SYNC_DATE_KEY]: Date.now(),
-            [STORAGE_KEYS.text]: value,
+            [EditorDataService.getEditorStorageKey()]: {
+              [editorId]: value,
+            },
           },
         });
       }
@@ -102,14 +106,16 @@ export const StorageService = {
         return storage.set({
           [STORE_KEY]: {
             [SYNC_DATE_KEY]: Date.now(),
-            [STORAGE_KEYS.text]: value,
+            [EditorDataService.getEditorStorageKey()]: {
+              [editorId]: value,
+            },
           },
         });
       }
 
       /*
 
-      Store init
+      Upgrade from v3
 
       local: {
         holi3localeditorBackup: {date: number, text: string}
@@ -128,9 +134,52 @@ export const StorageService = {
 
       */
 
+      value = await new Promise((resolve) => {
+        storage.get('holi3', (data) => resolve(data?.holi3));
+      });
+
+      if (value?.text) {
+        localStorage.clear();
+
+        await new Promise((resolve) => {
+          storage.clear(resolve);
+        });
+
+        return storage.set({
+          [STORE_KEY]: {
+            [SYNC_DATE_KEY]: Date.now(),
+            [EditorDataService.getEditorStorageKey()]: {
+              [editorId]: value?.text,
+            },
+          },
+        });
+      }
+
+      /*
+
+      v4
+
+      local: {
+        holi4_LOCAL_EDITOR_[EDITOR_ID]_HISTORY: Object
+        holi4_LOCAL_EDITOR_[EDITOR_ID]_BACKUP: string
+        holi4_LOCAL_FETCH_SERVICE_REQUESTS: {expirationDate: number, data: Object, url: string}
+      }
+
+      sync: {
+        data: {
+          holi4: {
+            DATE: number
+            EDITOR: { [EDITOR_ID]: string }
+          }
+        }
+      }
+
+       */
+
       return storage.set({
         [STORE_KEY]: {
           [SYNC_DATE_KEY]: new Date('1991-1-1').getTime(),
+          [EditorDataService.getEditorStorageKey()]: {},
         },
       });
     }
@@ -157,7 +206,7 @@ export const StorageService = {
   },
 
   getLocal(key) {
-    const value = localStorage.getItem(`${STORE_LOCAL_KEY}${key}`);
+    const value = localStorage.getItem(`${STORE_LOCAL_KEY}_${key}`);
 
     if (value !== null) {
       try {
@@ -172,7 +221,12 @@ export const StorageService = {
 
   set(key, value) {
     clearTimeout(_syncTimeoutId);
-    _syncData = { ..._syncData, [SYNC_DATE_KEY]: Date.now(), [key]: value };
+
+    _syncData = {
+      ..._syncData,
+      [SYNC_DATE_KEY]: Date.now(),
+      [key]: value,
+    };
 
     // TODO trigger local change before sync
 
@@ -188,6 +242,6 @@ export const StorageService = {
   },
 
   setLocal(key, value) {
-    localStorage.setItem(`${STORE_LOCAL_KEY}${key}`, JSON.stringify(value));
+    localStorage.setItem(`${STORE_LOCAL_KEY}_${key}`, JSON.stringify(value));
   },
 };

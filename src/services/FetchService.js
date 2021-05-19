@@ -1,13 +1,13 @@
 import { StorageService } from './StorageService.js';
-import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
 
+const STORAGE_KEY = 'FETCH_SERVICE_REQUESTS';
 const CACHE_DURATION = 300000; // Five minutes
 let cachedRequests;
 
 export const FetchService = {
   init() {
     const now = Date.now();
-    cachedRequests = StorageService.getLocal(STORAGE_KEYS.fetchServiceRequests);
+    cachedRequests = StorageService.getLocal(STORAGE_KEY);
 
     if (!Array.isArray(cachedRequests)) {
       cachedRequests = [];
@@ -17,7 +17,7 @@ export const FetchService = {
       ({ expirationDate }) => expirationDate > now
     );
 
-    StorageService.setLocal(STORAGE_KEYS.fetchServiceRequests, cachedRequests);
+    StorageService.setLocal(STORAGE_KEY, cachedRequests);
   },
 
   getCachedJSON(url) {
@@ -32,10 +32,7 @@ export const FetchService = {
               .filter((request) => request.url !== url)
               .concat([{ url, expirationDate, data }]);
 
-            StorageService.setLocal(
-              STORAGE_KEYS.fetchServiceRequests,
-              cachedRequests
-            );
+            StorageService.setLocal(STORAGE_KEY, cachedRequests);
 
             resolve(data);
           })

@@ -1,14 +1,9 @@
-import { StorageService } from '../services/StorageService.js';
-import { STORAGE_KEYS } from '../constants/STORAGE_KEYS.js';
 import { EDITOR_ELEMENTS } from '../constants/EDITOR_ELEMENTS.js';
+import { EditorDataService } from '../services/EditorDataService.js';
 
 export const editor = async () => {
   const textarea = document.getElementById('editorTextarea');
-
-  textarea.value = (() => {
-    const backup = StorageService.getLocal(STORAGE_KEYS.editorBackup);
-    return (backup && backup.text) || '';
-  })();
+  textarea.value = EditorDataService.getBackup() || '';
 
   const editor = CodeMirror.fromTextArea(textarea, {
     mode: 'markdown',
@@ -19,18 +14,18 @@ export const editor = async () => {
   });
 
   const doc = editor.getDoc();
-  doc.setValue((await StorageService.get(STORAGE_KEYS.text)) || '');
+  doc.setValue(await EditorDataService.getText());
   doc.eachLine((line) => parseLine(doc, line));
 
   try {
-    doc.setHistory(StorageService.getLocal(STORAGE_KEYS.editorHistory));
+    doc.setHistory(EditorDataService.getHistory());
   } catch (error) {
     doc.setHistory({ done: [], undone: [] });
   }
 
   editor.setOption('readOnly', false);
 
-  StorageService.onChange(STORAGE_KEYS.text, (value) => {
+  EditorDataService.onChangeText((value) => {
     if (value !== doc.getValue()) {
       doc.setValue(value);
       doc.eachLine((line) => parseLine(doc, line));
@@ -43,12 +38,8 @@ export const editor = async () => {
       return;
     }
 
-    StorageService.setLocal(STORAGE_KEYS.editorHistory, doc.getHistory());
-    StorageService.setLocal(STORAGE_KEYS.editorBackup, {
-      date: Date.now(),
-      text: doc.getValue(),
-    });
-    StorageService.set(STORAGE_KEYS.text, doc.getValue());
+    EditorDataService.setHistory(doc.getHistory());
+    EditorDataService.setText(doc.getValue());
 
     if (
       change.origin === '+input' &&
