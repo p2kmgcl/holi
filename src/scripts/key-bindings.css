@@ -12,7 +12,9 @@
   border: solid thin var(--border-color);
   background: var(--background);
   border-radius: 4px;
-  box-shadow: 0 0 0 100vmax var(--shadow-color), 0 20px 40px var(--shadow-color);
+  box-shadow: 0 0 0 100vmax var(--shadow-color),
+    0 0 0 100vmax var(--shadow-color), 0 0 0 100vmax var(--shadow-color),
+    0 20px 40px var(--shadow-color);
   box-sizing: border-box;
   width: calc(100vw - 2rem);
   max-width: 80ch;
