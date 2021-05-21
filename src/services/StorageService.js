@@ -39,6 +39,7 @@ const STORE_LOCAL_KEY = `${STORE_KEY}_LOCAL`;
 const SYNC_DATE_KEY = 'DATE';
 const SYNC_DELAY = 1000;
 
+let _localChangeCallbacks = {};
 let _syncTimeoutId = null;
 let _syncData = {};
 
@@ -193,6 +194,14 @@ export const StorageService = {
       if (nextStore && origin === 'sync') fn(nextStore[key]);
     };
 
+    if (_syncData?.[key]) {
+      fn(_syncData[key]);
+    }
+
+    const callbackList = _localChangeCallbacks[key] || [];
+    callbackList.push(fn);
+    _localChangeCallbacks[key] = callbackList;
+
     onStorageChanged.addListener(callback);
     return () => onStorageChanged.removeListener(callback);
   },
@@ -228,7 +237,9 @@ export const StorageService = {
       [key]: value,
     };
 
-    // TODO trigger local change before sync
+    _localChangeCallbacks[key]?.forEach((callback) => {
+      callback(value);
+    });
 
     _syncTimeoutId = setTimeout(() => {
       storage.get(STORE_KEY, (data) => {
