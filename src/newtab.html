@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New tab</title>
+    <title data-translate>newTab</title>
 
     <link rel="stylesheet" href="../dependencies/codemirror-5.57.0.css" />
     <link rel="prefetch" href="../dependencies/emojilib-2.4.0.json" />
@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="scripts/bookmarks.css" />
     <link rel="stylesheet" href="scripts/editor.css" />
+    <link rel="stylesheet" href="scripts/key-bindings.css" />
 
     <link rel="stylesheet" href="editor-elements/CheckboxEditorElement.css" />
     <link rel="stylesheet" href="editor-elements/GitHubRepoEditorElement.css" />
@@ -25,6 +26,8 @@
   <body>
     <main id="app" class="loading">
       <section id="editor">
+        <h1 class="sr-only" data-translate>textEditor</h1>
+
         <div id="editorContent">
           <div id="editorMirror">
             <textarea
@@ -35,7 +38,34 @@
         </div>
       </section>
 
-      <section id="bookmarks"></section>
+      <section id="bookmarks">
+        <h1 class="sr-only" data-translate>bookmarkList</h1>
+      </section>
+
+      <section id="keyBindings">
+        <header class="sr-only">
+          <h1 id="keyBindingsTitle" data-translate>keyBindings</h1>
+          <p data-translate>pressCtrlQuestionToShowOrHideKeyBindingsDialog</p>
+        </header>
+
+        <div
+          tabindex="-1"
+          class="hidden"
+          id="keyBindingsDialog"
+          aria-labelledby="keyBindingsTitle"
+          role="dialog"
+        >
+        <table>
+          <thead>
+            <tr>
+              <th data-translate>action</th>
+              <th data-translate>keyboardShortcut</th>
+            </tr>
+          </thead>
+          <tbody id="keyBindingsTableBody"></tbody>
+        </table>
+      </div>
+      </section>
     </main>
 
     <template id="bookmarkCategoryTemplate">

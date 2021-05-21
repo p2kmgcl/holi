@@ -7,5 +7,32 @@
   },
   "longDescription": {
     "message": "Utiliza holi para organizar tus pensamientos en tu página de nueva pestaña u organizar tus marcadores en una simple y sencilla barra lateral"
+  },
+  "action": {
+    "message": "Acción"
+  },
+  "keyboardShortcut": {
+    "message": "Atajo de teclado"
+  },
+  "keyBindings": {
+    "message": "Atajos de teclado"
+  },
+  "bookmarkList": {
+    "message": "Lista de marcadores"
+  },
+  "textEditor": {
+    "message": "Editor de texto"
+  },
+  "pressCtrlQuestionToShowOrHideKeyBindingsDialog": {
+    "message": "Pulsa <kbd>control</kbd>+<kbd>?</kbd> para mostrar u ocultar el cuadro de diálogo de ayuda para atajos de teclado."
+  },
+  "showHideKeyBindingsHelpDialog": {
+    "message": "Mostrar/ocultar el cuadro de diálogo de ayuda para atajos de teclado."
+  },
+  "focusBookmarkList": {
+    "message": "Enfocar la lista de marcadores."
+  },
+  "focusTextEditor": {
+    "message": "Enfocar el editor de texto."
   }
 }

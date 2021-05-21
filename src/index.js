@@ -5,8 +5,7 @@ import { bookmarks } from './scripts/bookmarks.js';
 import { editor } from './scripts/editor.js';
 import { EmojiService } from './services/EmojiService.js';
 import { EditorDataService } from './services/EditorDataService.js';
-
-document.head.querySelector('title').innerText = I18NService.get('newTab');
+import { keyBindings } from './scripts/key-bindings.js';
 
 const resolveInOrder = (getPromiseList) =>
   getPromiseList.reduce(
@@ -15,6 +14,7 @@ const resolveInOrder = (getPromiseList) =>
   );
 
 resolveInOrder([
+  () => I18NService.init(),
   () => StorageService.init(),
   () => FetchService.init(),
   () => EmojiService.init(),
@@ -26,6 +26,7 @@ resolveInOrder([
 
     bookmarks();
     editor();
+    keyBindings();
   })
   .catch((error) => {
     console.log(error);

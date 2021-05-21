@@ -1,0 +1,56 @@
+#keyBindings {
+  position: absolute;
+}
+
+#keyBindingsDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-60%);
+  z-index: 20;
+  padding: 1rem;
+  border: solid thin var(--border-color);
+  background: var(--background);
+  border-radius: 4px;
+  box-shadow: 0 0 0 100vmax var(--shadow-color), 0 20px 40px var(--shadow-color);
+  box-sizing: border-box;
+  width: calc(100vw - 2rem);
+  max-width: 80ch;
+}
+
+#keyBindingsDialog:focus {
+  outline: none;
+}
+
+#keyBindingsDialog.hidden {
+  display: none;
+}
+
+#keyBindingsDialog table {
+  width: 100%;
+}
+
+#keyBindingsDialog th,
+#keyBindingsDialog td {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+#keyBindingsDialog td:nth-child(2) {
+  white-space: nowrap;
+}
+
+kbd {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.25em 0.5em;
+  margin: 0 0.25em;
+  display: inline-block;
+  border: solid thin var(--border-color);
+  border-radius: 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--highlight-background) 100%
+  );
+}

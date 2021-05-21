@@ -7,5 +7,32 @@
   },
   "longDescription": {
     "message": "Use holi to organize your thoughts in your new tab page or manage your bookmarks with a simple, minimal sidebar"
+  },
+  "action": {
+    "message": "Action"
+  },
+  "keyboardShortcut": {
+    "message": "Keyboard shortcut"
+  },
+  "keyBindings": {
+    "message": "Key bindings"
+  },
+  "bookmarkList": {
+    "message": "Bookmark list"
+  },
+  "textEditor": {
+    "message": "Text editor"
+  },
+  "pressCtrlQuestionToShowOrHideKeyBindingsDialog": {
+    "message": "Press <kbd>control</kbd>+<kbd>?</kbd> to show or hide the key bindings help dialog."
+  },
+  "showHideKeyBindingsHelpDialog": {
+    "message": "Show/hide key bindings help dialog"
+  },
+  "focusBookmarkList": {
+    "message": "Focus bookmark list"
+  },
+  "focusTextEditor": {
+    "message": "Focus text editor"
   }
 }
