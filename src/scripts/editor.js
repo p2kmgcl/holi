@@ -11,6 +11,7 @@ export const editor = async () => {
     theme: 'idea',
     lineWrapping: true,
     readOnly: true,
+    inputStyle: 'contenteditable',
   });
 
   const doc = editor.getDoc();
