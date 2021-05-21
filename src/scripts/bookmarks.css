@@ -14,6 +14,8 @@
   will-change: border-left-color, box-shadow, width, opacity;
 }
 
+#bookmarks:focus,
+#bookmarks:focus-within,
 #bookmarks:hover {
   box-shadow: 0 0 50px var(--shadow-color);
   border-left-color: var(--border-color);
@@ -25,6 +27,10 @@
     opacity ease calc(var(--transition-duration) / 3);
   width: 40ch;
   opacity: 1;
+}
+
+#bookmarks:focus {
+  outline: none;
 }
 
 .bookmark-link {
@@ -42,11 +48,17 @@
   will-change: background;
 }
 
-.bookmark-link:hover {
+.bookmark-link:hover,
+.bookmark-link:focus {
   background: var(--highlight-background);
   color: var(--highlight);
   font-weight: bolder;
   text-decoration: underline;
+}
+
+.bookmark-link:focus {
+  box-shadow: inset 8px 0 0 1px var(--highlight);
+  outline: none;
 }
 
 .bookmark-link__label {
@@ -79,6 +91,7 @@
   padding-left: 0;
 }
 
+#bookmarks:focus-within .bookmark-category__label,
 #bookmarks:hover .bookmark-category__label {
   max-width: 80%;
   text-overflow: ellipsis;
