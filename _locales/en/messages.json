@@ -34,5 +34,17 @@
   },
   "focusTextEditor": {
     "message": "Focus text editor"
+  },
+  "focusSlotSelector": {
+    "message": "Focus slot selector"
+  },
+  "editorSlots": {
+    "message": "Editor slots"
+  },
+  "addNewSlot": {
+    "message": "Add new slot"
+  },
+  "untitled": {
+    "message": "Untitled"
   }
 }

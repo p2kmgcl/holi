@@ -10,63 +10,71 @@ export const editor = async () => {
     keyMap: 'sublime',
     theme: 'idea',
     lineWrapping: true,
-    readOnly: true,
     inputStyle: 'contenteditable',
   });
 
   const doc = editor.getDoc();
-  doc.setValue(await EditorDataService.getText());
-  doc.eachLine((line) => parseLine(doc, line));
 
-  try {
-    doc.setHistory(EditorDataService.getHistory());
-  } catch (error) {
-    doc.setHistory({ done: [], undone: [] });
-  }
+  EditorDataService.onChangeEditor(async () => {
+    editor.setOption('readOnly', true);
 
-  editor.setOption('readOnly', false);
+    await new Promise((resolve) => {
+      EditorDataService.onChangeText((value) => {
+        if (value !== doc.getValue()) {
+          doc.setValue(value);
+          doc.eachLine((line) => parseLine(doc, line));
+        } else if (!doc.canEdit) {
+          doc.eachLine((line) => parseLine(doc, line));
 
-  EditorDataService.onChangeText((value) => {
-    if (value !== doc.getValue()) {
-      doc.setValue(value);
-      doc.eachLine((line) => parseLine(doc, line));
-    }
-  });
+          try {
+            doc.setHistory(EditorDataService.getHistory());
+          } catch (error) {
+            doc.setHistory({ done: [], undone: [] });
+          }
+        }
 
-  editor.on('change', (_, change) => {
-    // Remote change, do nothing
-    if (change.origin === 'setValue') {
-      return;
-    }
+        resolve();
+      });
+    });
 
-    EditorDataService.setHistory(doc.getHistory());
-    EditorDataService.setText(doc.getValue());
+    editor.on('change', (_, change) => {
+      // Remote change, do nothing
+      if (change.origin === 'setValue') {
+        return;
+      }
 
-    if (
-      change.origin === '+input' &&
-      ['', ' '].includes(change.text[change.text.length - 1])
-    ) {
-      const line = change.from.line;
-      const toCh = change.to.ch;
+      EditorDataService.setHistory(doc.getHistory());
+      EditorDataService.setText(doc.getValue());
 
-      const chunks = doc
-        .getRange({ line, ch: 0 }, { line, ch: toCh }, ' ')
-        .split(/\s/)
-        .filter((s) => s);
+      if (
+        change.origin === '+input' &&
+        ['', ' '].includes(change.text[change.text.length - 1])
+      ) {
+        const line = change.from.line;
+        const toCh = change.to.ch;
 
-      chunks.pop();
+        const chunks = doc
+          .getRange({ line, ch: 0 }, { line, ch: toCh }, ' ')
+          .split(/\s/)
+          .filter((s) => s);
 
-      const fromCh =
-        chunks.map((s) => s.length).reduce((a, b) => a + b, 0) + chunks.length;
+        chunks.pop();
 
-      addMarks(doc, { line, ch: fromCh }, { line, ch: toCh });
-    } else if (change.origin === 'paste' || change.origin === '+swapLine') {
-      doc.eachLine(
-        change.from.line,
-        change.to.line + change.text.length,
-        (line) => parseLine(doc, line)
-      );
-    }
+        const fromCh =
+          chunks.map((s) => s.length).reduce((a, b) => a + b, 0) +
+          chunks.length;
+
+        addMarks(doc, { line, ch: fromCh }, { line, ch: toCh });
+      } else if (change.origin === 'paste' || change.origin === '+swapLine') {
+        doc.eachLine(
+          change.from.line,
+          change.to.line + change.text.length,
+          (line) => parseLine(doc, line)
+        );
+      }
+    });
+
+    editor.setOption('readOnly', false);
   });
 };
 

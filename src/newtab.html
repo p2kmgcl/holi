@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="scripts/bookmarks.css" />
     <link rel="stylesheet" href="scripts/editor.css" />
     <link rel="stylesheet" href="scripts/key-bindings.css" />
+    <link rel="stylesheet" href="scripts/slot-selector.css" />
 
     <link rel="stylesheet" href="editor-elements/CheckboxEditorElement.css" />
     <link rel="stylesheet" href="editor-elements/GitHubRepoEditorElement.css" />
@@ -27,6 +28,18 @@
     <main id="app" class="loading">
       <section id="editor">
         <h1 class="sr-only" data-translate>textEditor</h1>
+
+        <section id="slotSelector" tabindex="-1">
+          <h1 class="sr-only" data-translate>editorSlots</h1>
+
+          <form id="slotSelectorForm">
+            <div id="slotSelectorList"></div>
+            <button id="addSlotButton" type="button">
+              <span class="sr-only" data-translate>addNewSlot</span>
+              <span role="presentation">+</span>
+            </button>
+          </form>
+        </section>
 
         <div id="editorContent">
           <div id="editorMirror">
@@ -90,6 +103,13 @@
           <span class="bookmark-link__label"></span>
         </a>
       </li>
+    </template>
+
+    <template id="slotTemplate">
+      <label class="slot-label">
+        <input class="slot-input sr-only" type="radio" name="slot" value="" />
+        <span class="slot-label__content"></span>
+      </label>
     </template>
 
     <script src="../dependencies/codemirror-5.57.0.js"></script>

@@ -36,6 +36,12 @@ export const keyBindings = () => {
       description: I18NService.get('focusTextEditor'),
     },
     {
+      keys: ['control', 'shift', 's'],
+      action: () =>
+        document.querySelector('#slotSelectorList .checked input').focus(),
+      description: I18NService.get('focusSlotSelector'),
+    },
+    {
       keys: ['control', '?'],
       action: toggleHelpDialog,
       description: I18NService.get('showHideKeyBindingsHelpDialog'),

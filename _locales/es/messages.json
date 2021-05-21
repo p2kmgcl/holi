@@ -34,5 +34,17 @@
   },
   "focusTextEditor": {
     "message": "Enfocar el editor de texto."
+  },
+  "focusSlotSelector": {
+    "message": "Enfocar el selector de espacio del editor"
+  },
+  "editorSlots": {
+    "message": "Espacios del editor"
+  },
+  "addNewSlot": {
+    "message": "Añadir nuevo espacio"
+  },
+  "untitled": {
+    "message": "Sin título"
   }
 }

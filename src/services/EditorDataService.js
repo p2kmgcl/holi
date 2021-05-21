@@ -7,6 +7,7 @@ const HISTORY_STORAGE_KEY = 'HISTORY';
 
 let editorId;
 let changeCallbacks = [];
+let changeEditorCallbacks = [];
 let cachedEditorData = {};
 
 const assertEditorId = () => {
@@ -22,9 +23,9 @@ export const EditorDataService = {
     const [firstEditorId] = Object.keys(cachedEditorData);
 
     if (!firstEditorId) {
-      this.addEditor();
+      EditorDataService.addEditor();
     } else {
-      this.setEditor(firstEditorId);
+      EditorDataService.setEditor(firstEditorId);
     }
 
     StorageService.onChange(EDITOR_STORAGE_KEY, (data) => {
@@ -40,18 +41,30 @@ export const EditorDataService = {
     }
 
     editorId = nextEditorId;
+    changeCallbacks = [];
 
     if (!(editorId in cachedEditorData)) {
-      this.setText('');
+      EditorDataService.setText('');
     } else {
-      changeCallbacks.forEach((callback) => {
-        callback(cachedEditorData[editorId] || '');
-      });
+      EditorDataService.setText(cachedEditorData[editorId]);
     }
+
+    changeEditorCallbacks.forEach((callback) => {
+      callback();
+    });
   },
 
   addEditor() {
-    this.setEditor(Date.now().toString());
+    EditorDataService.setEditor(Date.now().toString());
+  },
+
+  getEditor() {
+    return editorId;
+  },
+
+  onChangeEditor(callback) {
+    changeEditorCallbacks.push(callback);
+    callback();
   },
 
   getEditorStorageKey() {
@@ -93,14 +106,20 @@ export const EditorDataService = {
       nextText
     );
 
-    StorageService.set(EDITOR_STORAGE_KEY, {
-      ...cachedEditorData,
-      [editorId]: nextText,
+    cachedEditorData = { ...cachedEditorData, [editorId]: nextText };
+
+    Object.keys(cachedEditorData).forEach((cachedEditorId) => {
+      if (cachedEditorId !== editorId && !cachedEditorData[cachedEditorId]) {
+        delete cachedEditorData[cachedEditorId];
+      }
     });
+
+    StorageService.set(EDITOR_STORAGE_KEY, cachedEditorData);
   },
 
   onChangeText(callback) {
     assertEditorId();
     changeCallbacks.push(callback);
+    callback(EditorDataService.getText());
   },
 };

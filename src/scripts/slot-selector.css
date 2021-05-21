@@ -1,0 +1,75 @@
+#slotSelectorForm {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+#slotSelectorList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.slot-label {
+  cursor: pointer;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.slot-label:after {
+  content: '|';
+  opacity: 0.25;
+  display: block;
+  margin: 0 0.15rem;
+}
+
+.slot-label:last-child:after {
+  margin-right: 0;
+}
+
+.slot-label__content {
+  max-width: 20ch;
+  display: block;
+  border: solid var(--background) 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.slot-label.checked .slot-label__content {
+  font-weight: bolder;
+  color: var(--highlight);
+  text-decoration: underline;
+}
+
+.slot-label:focus-within .slot-label__content {
+  background-color: var(--highlight-background);
+  border: solid var(--highlight-background) 0.5rem;
+  box-shadow: 0 0 0 1px var(--highlight);
+}
+
+#addSlotButton {
+  background-color: transparent;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: inherit;
+}
+
+#addSlotButton:hover {
+  background: var(--highlight-background);
+}
+
+#addSlotButton:focus {
+  outline: none;
+  color: var(--highlight);
+  box-shadow: inset 0 0 0 1px var(--highlight);
+}
