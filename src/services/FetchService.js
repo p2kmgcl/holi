@@ -1,3 +1,4 @@
+import { deepEqual } from '../deepEqual.js';
 import { StorageService } from './StorageService.js';
 
 const STORAGE_KEY = 'FETCH_SERVICE_REQUESTS';
@@ -7,17 +8,19 @@ let cachedRequests;
 export const FetchService = {
   init() {
     const now = Date.now();
-    cachedRequests = StorageService.getLocal(STORAGE_KEY);
+    const localCachedRequests = StorageService.getLocal(STORAGE_KEY);
 
-    if (!Array.isArray(cachedRequests)) {
-      cachedRequests = [];
-    }
+    cachedRequests = Array.isArray(localCachedRequests)
+      ? localCachedRequests
+      : [];
 
     cachedRequests = cachedRequests.filter(
       ({ expirationDate }) => expirationDate > now
     );
 
-    StorageService.setLocal(STORAGE_KEY, cachedRequests);
+    if (!deepEqual(cachedRequests, localCachedRequests)) {
+      StorageService.setLocal(STORAGE_KEY, cachedRequests);
+    }
   },
 
   getCachedJSON(url) {

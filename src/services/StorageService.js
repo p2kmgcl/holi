@@ -215,7 +215,7 @@ export const StorageService = {
   },
 
   getLocal(key) {
-    const value = localStorage.getItem(`${STORE_LOCAL_KEY}_${key}`);
+    const value = localStorage.getItem(StorageService.getLocalKey(key));
 
     if (value !== null) {
       try {
@@ -228,11 +228,11 @@ export const StorageService = {
     return null;
   },
 
-  set(key, value) {
-    if (deepEqual(value, _syncData[key])) {
-      return;
-    }
+  getLocalKey(key) {
+    return `${STORE_LOCAL_KEY}_${key}`;
+  },
 
+  set(key, value) {
     clearTimeout(_syncTimeoutId);
 
     _syncData = {
@@ -257,36 +257,9 @@ export const StorageService = {
   },
 
   setLocal(key, value) {
-    localStorage.setItem(`${STORE_LOCAL_KEY}_${key}`, JSON.stringify(value));
+    localStorage.setItem(
+      StorageService.getLocalKey(key),
+      JSON.stringify(value)
+    );
   },
 };
-
-function deepEqual(a, b) {
-  if (a === b) {
-    return true;
-  }
-
-  if (Array.isArray(a) && Array.isArray(b)) {
-    if (a.length !== b.length) {
-      return false;
-    }
-
-    return a.every((value, index) => {
-      return deepEqual(value, b[index]);
-    });
-  }
-
-  if (a && b && typeof a === 'object' && typeof b === 'object') {
-    const keys = Object.keys(a);
-
-    if (keys.length !== Object.keys(b).length) {
-      return false;
-    }
-
-    return keys.every((key) => {
-      return deepEqual(a[key], b[key]);
-    });
-  }
-
-  return false;
-}

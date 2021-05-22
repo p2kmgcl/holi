@@ -42,8 +42,7 @@ export const editor = async () => {
         return;
       }
 
-      EditorDataService.setHistory(doc.getHistory());
-      EditorDataService.setText(doc.getValue());
+      EditorDataService.setText(doc.getValue(), doc.getHistory());
 
       if (
         change.origin === '+input' &&
