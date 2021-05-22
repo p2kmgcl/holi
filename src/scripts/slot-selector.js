@@ -10,7 +10,6 @@ export const slotSelector = () => {
 
   addSlotButton.addEventListener('click', () => {
     EditorDataService.addEditor();
-    document.querySelector('#editor .CodeMirror-code').focus();
   });
 
   slotForm.addEventListener('change', () => {
