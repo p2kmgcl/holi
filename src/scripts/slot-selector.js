@@ -24,26 +24,31 @@ export const slotSelector = () => {
   StorageService.onChange('EDITOR', (value) => {
     slotSelectorList.innerHTML = '';
 
-    Object.entries(value).forEach(([editorId, content]) => {
-      const slotElement = slotTemplate.content.cloneNode('true');
-      const slotLabel = slotElement.querySelector('.slot-label');
-      const slotInput = slotElement.querySelector('.slot-input');
-      const slotContent = slotElement.querySelector('.slot-label__content');
+    Object.entries(value)
+      .sort(
+        ([editorIdA], [editorIdB]) =>
+          (parseInt(editorIdA, 10) || 0) - (parseInt(editorIdB, 10) || 0)
+      )
+      .forEach(([editorId, content]) => {
+        const slotElement = slotTemplate.content.cloneNode('true');
+        const slotLabel = slotElement.querySelector('.slot-label');
+        const slotInput = slotElement.querySelector('.slot-input');
+        const slotContent = slotElement.querySelector('.slot-label__content');
 
-      slotInput.value = editorId;
+        slotInput.value = editorId;
 
-      slotContent.innerText =
-        content
-          .split('\n')
-          .map((line) => line.trim())
-          .filter((line) => line)[0] || I18NService.get('untitled');
+        slotContent.innerText =
+          content
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line)[0] || I18NService.get('untitled');
 
-      if (editorId === EditorDataService.getEditor()) {
-        slotLabel.classList.add('checked');
-        slotInput.checked = true;
-      }
+        if (editorId === EditorDataService.getEditor()) {
+          slotLabel.classList.add('checked');
+          slotInput.checked = true;
+        }
 
-      slotSelectorList.appendChild(slotElement);
-    });
+        slotSelectorList.appendChild(slotElement);
+      });
   });
 };
