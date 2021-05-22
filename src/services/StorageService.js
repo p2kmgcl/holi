@@ -229,6 +229,10 @@ export const StorageService = {
   },
 
   set(key, value) {
+    if (deepEqual(value, _syncData[key])) {
+      return;
+    }
+
     clearTimeout(_syncTimeoutId);
 
     _syncData = {
@@ -256,3 +260,33 @@ export const StorageService = {
     localStorage.setItem(`${STORE_LOCAL_KEY}_${key}`, JSON.stringify(value));
   },
 };
+
+function deepEqual(a, b) {
+  if (a === b) {
+    return true;
+  }
+
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) {
+      return false;
+    }
+
+    return a.every((value, index) => {
+      return deepEqual(value, b[index]);
+    });
+  }
+
+  if (a && b && typeof a === 'object' && typeof b === 'object') {
+    const keys = Object.keys(a);
+
+    if (keys.length !== Object.keys(b).length) {
+      return false;
+    }
+
+    return keys.every((key) => {
+      return deepEqual(a[key], b[key]);
+    });
+  }
+
+  return false;
+}
