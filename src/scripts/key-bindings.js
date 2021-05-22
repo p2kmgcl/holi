@@ -32,7 +32,8 @@ export const keyBindings = () => {
     },
     {
       keys: ['control', 'shift', 'e'],
-      action: () => document.querySelector('#editor .CodeMirror-code').focus(),
+      action: () =>
+        document.querySelector('#editor .CodeMirror textarea').focus(),
       description: I18NService.get('focusTextEditor'),
     },
     {

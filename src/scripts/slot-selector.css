@@ -14,6 +14,7 @@
   flex-grow: 1;
   display: flex;
   align-items: center;
+  opacity: 0.5;
 }
 
 .slot-label:after {
@@ -33,6 +34,10 @@
   border: solid var(--background) 0.5rem;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.slot-label.checked {
+  opacity: 1;
 }
 
 .slot-label.checked .slot-label__content {
