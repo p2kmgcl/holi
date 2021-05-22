@@ -2,6 +2,7 @@ import { StorageService } from './StorageService.js';
 
 const EDITOR_STORAGE_KEY = 'EDITOR';
 
+const SELECTED_EDITOR_STORAGE_KEY = 'SELECTED_EDITOR';
 const BACKUP_STORAGE_KEY = 'BACKUP';
 const HISTORY_STORAGE_KEY = 'HISTORY';
 
@@ -20,7 +21,9 @@ export const EditorDataService = {
   async init() {
     cachedEditorData = await StorageService.get(EDITOR_STORAGE_KEY);
 
-    const [firstEditorId] = Object.keys(cachedEditorData);
+    const firstEditorId =
+      StorageService.getLocal(SELECTED_EDITOR_STORAGE_KEY) ||
+      Object.keys(cachedEditorData)[0];
 
     if (!firstEditorId) {
       EditorDataService.addEditor();
@@ -39,6 +42,8 @@ export const EditorDataService = {
     if (!nextEditorId || typeof nextEditorId !== 'string') {
       throw new Error('Invalid editor ID');
     }
+
+    StorageService.setLocal(SELECTED_EDITOR_STORAGE_KEY, nextEditorId);
 
     editorId = nextEditorId;
     changeCallbacks = [];
