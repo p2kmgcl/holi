@@ -18,6 +18,18 @@ export const EditorDataService = {
   async init() {
     cachedEditorData = await StorageService.get(EDITOR_STORAGE_KEY);
 
+    EditorDataService.setFirstAvailableEditor();
+
+    StorageService.onChange(EDITOR_STORAGE_KEY, (data) => {
+      cachedEditorData = data;
+
+      changeTextCallback.forEach((callback) => {
+        callback(data[editorId]);
+      });
+    });
+  },
+
+  setFirstAvailableEditor() {
     const firstEditorId =
       StorageService.getLocal(SELECTED_EDITOR_STORAGE_KEY) ||
       Object.keys(cachedEditorData)[0];
@@ -28,12 +40,6 @@ export const EditorDataService = {
       editorId = firstEditorId;
       EditorDataService.setEditor(firstEditorId);
     }
-
-    StorageService.onChange(EDITOR_STORAGE_KEY, (data) => {
-      changeTextCallback.forEach((callback) => {
-        callback(data[editorId]);
-      });
-    });
   },
 
   setEditor(nextEditorId) {

@@ -19,6 +19,11 @@ export const editor = async () => {
 
     await new Promise((resolve) => {
       EditorDataService.onChangeText((value) => {
+        if (value === undefined) {
+          EditorDataService.setFirstAvailableEditor();
+          return;
+        }
+
         if (value !== doc.getValue()) {
           doc.setValue(value);
           doc.eachLine((line) => parseLine(doc, line));
