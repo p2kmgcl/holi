@@ -47,7 +47,7 @@ Hielo+ (v1.3.0)
 Hielo++ (v1.4.0)
 Inmóvil
 Inútil
-Lázaro
+Lázaro (v2.9.1)
 Lázaro+
 Lévita
 Lévita+
