@@ -1,7 +1,5 @@
 #app {
-  display: flex;
   height: 100vh;
-  position: relative;
 }
 
 #editor,
@@ -10,8 +8,6 @@
 }
 
 #editor {
-  flex-grow: 1;
-  width: 100vw;
   padding: 0;
   margin-right: var(--bookmarks-width);
   box-sizing: border-box;

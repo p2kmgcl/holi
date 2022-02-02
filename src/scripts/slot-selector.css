@@ -10,22 +10,16 @@
 }
 
 .slot-label {
-  cursor: pointer;
-  flex-grow: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  opacity: 0.5;
+  cursor: pointer;
 }
 
 .slot-label:after {
   content: '|';
-  opacity: 0.25;
   display: block;
   margin: 0 0.15rem;
-}
-
-.slot-label:last-child:after {
-  margin-right: 0;
+  opacity: 0.5;
 }
 
 .slot-label__content {
@@ -34,9 +28,10 @@
   border: solid var(--background) 0.5rem;
   white-space: nowrap;
   overflow: hidden;
+  opacity: 0.5;
 }
 
-.slot-label.checked {
+.slot-label.checked > .slot-label__content {
   opacity: 1;
 }
 
@@ -59,12 +54,10 @@
   border: none;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2em;
+  height: 2em;
+  line-height: 2.25em;
+  flex-shrink: 0;
   border-radius: 50%;
   color: inherit;
 }

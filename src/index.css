@@ -17,7 +17,7 @@ body {
   color: var(--color);
   background: var(--background);
   font-family: JetBrains Mono, Cascadia Mono PL, Cascadia Mono, Consolas,
-    Inconsolata, Victor Mono, monospace;
+    Inconsolata, Victor Mono, IBM Plex Mono, monospace;
   font-size: 1rem;
   margin: 0;
 }

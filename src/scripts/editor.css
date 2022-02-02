@@ -4,6 +4,7 @@
   max-width: 90ch;
   width: 100%;
   margin: 2rem auto;
+  padding-left: 1ch;
   box-sizing: border-box;
 }
 
