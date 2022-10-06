@@ -33,7 +33,6 @@ export const JiraIssueEditorElement = ({ text: url, matches, onRender }) => {
   const content = document.createElement('span');
   content.innerText = issueId;
 
-  link.appendChild(tooltip);
   link.appendChild(content);
 
   FetchService.getCachedJSON(
@@ -45,10 +44,14 @@ export const JiraIssueEditorElement = ({ text: url, matches, onRender }) => {
     link.classList.toggle('editor-link--closed', statusEmoji === CLOSED_EMOJI);
     tooltip.innerText = statusEmoji;
     tooltip.dataset.tooltip = `${statusEmoji} ${issue.fields.status.name}\n🦹 ${issue.fields.creator.displayName}\n💃 ${issue.fields.assignee.displayName}`;
+
+    link.insertBefore(tooltip, content);
+
     onRender();
   });
 
   return link;
 };
 
-JiraIssueEditorElement.regexp = /^https:\/\/issues\.liferay\.com\/browse\/([A-Z]+-[0-9]+)/i;
+JiraIssueEditorElement.regexp =
+  /^https:\/\/issues\.liferay\.com\/browse\/([A-Z]+-[0-9]+)/i;

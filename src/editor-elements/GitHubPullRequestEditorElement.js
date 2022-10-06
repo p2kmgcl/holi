@@ -31,7 +31,6 @@ export const GitHubPullRequestEditorElement = ({
   const content = document.createElement('span');
   content.innerText = label;
 
-  link.appendChild(tooltip);
   link.appendChild(content);
 
   FetchService.getCachedJSON(
@@ -74,6 +73,8 @@ export const GitHubPullRequestEditorElement = ({
         tooltip.dataset.tooltip = Object.entries(mergedStatuses)
           .map(([context, value]) => `${STATUS_TO_EMOJI[value]} ${context}`)
           .join('\n');
+
+        link.insertBefore(tooltip, content);
       }
 
       onRender();
@@ -82,4 +83,5 @@ export const GitHubPullRequestEditorElement = ({
   return link;
 };
 
-GitHubPullRequestEditorElement.regexp = /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/pull\/([0-9]+)\/?/i;
+GitHubPullRequestEditorElement.regexp =
+  /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/pull\/([0-9]+)\/?/i;
