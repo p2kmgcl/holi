@@ -10,6 +10,9 @@ export const editor = async () => {
     keyMap: 'sublime',
     theme: 'idea',
     lineWrapping: true,
+    indentWithTabs: false,
+    indentUnit: 4,
+    tabSize: 4,
   });
 
   const doc = editor.getDoc();
