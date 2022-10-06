@@ -18,17 +18,14 @@ const personTemplate = `
   </a>
 `;
 
-const issueTemplate = `
-  <li><a class="editor-link" href=""></a>
-`;
-
 export const GitHubRepoEditorElement = ({ matches, onRender }) => {
   const [owner, repo] = matches;
 
   const wrapper = document.createElement('div');
   wrapper.innerHTML = template;
-  wrapper.querySelector('h1').innerHTML =
-    `<a href="https://github.com/${owner}/${repo}"># ${owner}/${repo}</a>`;
+  wrapper.querySelector(
+    'h1'
+  ).innerHTML = `<a href="https://github.com/${owner}/${repo}"># ${owner}/${repo}</a>`;
 
   const prList = wrapper.querySelector('.pr-list');
   const issueList = wrapper.querySelector('.issue-list');
@@ -121,7 +118,8 @@ export const GitHubRepoEditorElement = ({ matches, onRender }) => {
   return wrapper;
 };
 
-GitHubRepoEditorElement.regexp = /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/?$/i;
+GitHubRepoEditorElement.regexp =
+  /^https:\/\/github\.com\/([a-z0-9\-_]+)\/([a-z0-9\-_]+)\/?$/i;
 
 function invertColor(hex) {
   if (hex.indexOf('#') === 0) {
