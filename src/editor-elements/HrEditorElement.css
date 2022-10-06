@@ -3,7 +3,7 @@
   width: 100%;
   overflow: visible;
   height: 1px;
-  border-style: dashed;
+  border-style: dotted;
   border-color: var(--border-color);
   border-width: 2px 0 0 0;
 }
