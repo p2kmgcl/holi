@@ -3,10 +3,8 @@
   flex-direction: column;
   width: calc(100% - 1ch);
   box-sizing: border-box;
-  margin-bottom: 1ch;
   border: solid 1px var(--border-color);
   border-radius: 4px;
-  box-shadow: 1ch 1ch 0 0 var(--shadow-color);
   overflow: hidden;
 }
 
@@ -36,8 +34,12 @@
   margin-top: 1rem;
 }
 
-.editor-element--GitHubRepoEditorElement .pr-list:not(:empty) + .issue-list:empty,
-.editor-element--GitHubRepoEditorElement .pr-list:not(:empty) + .issue-list:not(:empty) {
+.editor-element--GitHubRepoEditorElement
+  .pr-list:not(:empty)
+  + .issue-list:empty,
+.editor-element--GitHubRepoEditorElement
+  .pr-list:not(:empty)
+  + .issue-list:not(:empty) {
   margin-bottom: 1rem;
 }
 
