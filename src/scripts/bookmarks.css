@@ -52,8 +52,7 @@
 .bookmark-link:focus {
   background: var(--highlight-background);
   color: var(--highlight);
-  font-weight: bolder;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .bookmark-link:focus {

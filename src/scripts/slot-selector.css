@@ -38,7 +38,7 @@
 .slot-label.checked .slot-label__content {
   font-weight: bolder;
   color: var(--highlight);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .slot-label:focus-within .slot-label__content {

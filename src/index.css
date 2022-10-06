@@ -9,15 +9,10 @@ html {
   --transition-duration: 0.3s;
 }
 
-html {
-  font-size: 18px;
-}
-
 body {
   color: var(--color);
   background: var(--background);
-  font-family: JetBrains Mono, Cascadia Mono PL, Cascadia Mono, Consolas,
-    Inconsolata, Victor Mono, IBM Plex Mono, monospace;
+  font-family: monospace;
   font-size: 1rem;
   margin: 0;
 }
@@ -34,6 +29,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--color);
+}
+
+a {
+  text-decoration: none;
 }
 
 .sr-only {
