@@ -1,7 +1,7 @@
 .editor-element--CheckBoxEditorElement {
   background: var(--background-color);
-  width: 1rem;
-  height: 1rem;
+  width: calc(2ch + 1.5px);
+  height: calc(2ch + 1.5px);
   margin: 0;
   appearance: none;
   vertical-align: middle;
@@ -9,7 +9,7 @@
   box-sizing: border-box;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 4px;
   transition: background ease var(--transition-duration);
   will-change: transition;
   outline: none;
