@@ -1,12 +1,12 @@
 #slotSelectorForm {
   display: flex;
   align-items: center;
-  padding: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-bottom: solid var(--border-color) thin;
 }
 
 #slotSelectorList {
-  display: flex;
-  flex-wrap: wrap;
+  display: contents;
 }
 
 .slot-label {
@@ -16,7 +16,7 @@
 }
 
 .slot-label:after {
-  content: '|';
+  content: '';
   display: block;
   margin: 0 0.15rem;
   opacity: 0.5;
@@ -24,6 +24,7 @@
 
 .slot-label__content {
   max-width: 20ch;
+  border-radius: 4px;
   display: block;
   border: solid var(--background) 0.5rem;
   white-space: nowrap;
@@ -39,24 +40,27 @@
   font-weight: bolder;
   color: var(--highlight);
   text-decoration: none;
+  background-color: var(--highlight-background);
+  border: solid var(--highlight-background) 0.5rem;
 }
 
 .slot-label:focus-within .slot-label__content {
-  background-color: var(--highlight-background);
-  border: solid var(--highlight-background) 0.5rem;
   box-shadow: 0 0 0 1px var(--highlight);
 }
 
 #addSlotButton {
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  width: 2rem;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  display: inline-grid;
+  place-items: center;
   font-family: inherit;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  width: 2em;
-  height: 2em;
-  line-height: 2.25em;
   flex-shrink: 0;
   border-radius: 50%;
   color: inherit;
