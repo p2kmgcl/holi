@@ -1,26 +1,20 @@
 import { I18NService } from '../services/I18NService.js';
 
 export const keyBindings = () => {
-  const keyBindingsDialog = document.getElementById('keyBindingsDialog');
+  const keyBindingsDialog = document.getElementById('keyBindings');
   const keyBindingsTableBody = document.getElementById('keyBindingsTableBody');
 
   const toggleHelpDialog = () => {
-    keyBindingsDialog.classList.toggle('hidden');
-
-    if (!keyBindingsDialog.classList.contains('hidden')) {
-      keyBindingsDialog.focus();
+    if (keyBindingsDialog.open) {
+      keyBindingsDialog.close();
+    } else {
+      keyBindingsDialog.showModal();
     }
   };
 
   keyBindingsDialog.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       toggleHelpDialog();
-    }
-  });
-
-  keyBindingsDialog.addEventListener('focusout', () => {
-    if (!keyBindingsDialog.classList.contains('hidden')) {
-      keyBindingsDialog.focus();
     }
   });
 

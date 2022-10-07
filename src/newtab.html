@@ -55,30 +55,22 @@
         <h1 class="sr-only" data-translate>bookmarkList</h1>
       </section>
 
-      <section id="keyBindings">
+      <dialog id="keyBindings">
         <header class="sr-only">
           <h1 id="keyBindingsTitle" data-translate>keyBindings</h1>
           <p data-translate>pressCtrlQuestionToShowOrHideKeyBindingsDialog</p>
         </header>
 
-        <div
-          tabindex="-1"
-          class="hidden"
-          id="keyBindingsDialog"
-          aria-labelledby="keyBindingsTitle"
-          role="dialog"
-        >
-          <table>
-            <thead>
-              <tr>
-                <th data-translate>action</th>
-                <th data-translate>keyboardShortcut</th>
-              </tr>
-            </thead>
-            <tbody id="keyBindingsTableBody"></tbody>
-          </table>
-        </div>
-      </section>
+        <table>
+          <thead>
+            <tr>
+              <th data-translate>action</th>
+              <th data-translate>keyboardShortcut</th>
+            </tr>
+          </thead>
+          <tbody id="keyBindingsTableBody"></tbody>
+        </table>
+      </dialog>
     </main>
 
     <template id="bookmarkCategoryTemplate">

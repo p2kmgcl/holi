@@ -1,13 +1,4 @@
 #keyBindings {
-  position: absolute;
-}
-
-#keyBindingsDialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-60%);
-  z-index: 20;
   padding: 1rem;
   border: solid thin var(--border-color);
   background: var(--background);
@@ -20,29 +11,17 @@
   max-width: 80ch;
 }
 
-#keyBindingsDialog:focus {
-  outline: none;
-}
-
-#keyBindingsDialog.hidden {
-  display: none;
-}
-
-#keyBindingsDialog table {
-  width: 100%;
-}
-
-#keyBindingsDialog th,
-#keyBindingsDialog td {
+#keyBindings th,
+#keyBindings td {
   padding: 0.5rem;
   text-align: left;
 }
 
-#keyBindingsDialog td:nth-child(2) {
+#keyBindings td:nth-child(2) {
   white-space: nowrap;
 }
 
-kbd {
+#keyBindings kbd {
   font-family: inherit;
   font-size: 1rem;
   padding: 0.25em 0.5em;
