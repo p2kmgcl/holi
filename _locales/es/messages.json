@@ -30,19 +30,19 @@
     "message": "Mostrar/ocultar el cuadro de diálogo de ayuda para atajos de teclado."
   },
   "focusBookmarkList": {
-    "message": "Enfocar la lista de marcadores."
+    "message": "Mover el foco a la lista de marcadores."
   },
   "focusTextEditor": {
-    "message": "Enfocar el editor de texto."
+    "message": "Mover el foco al editor de texto."
   },
-  "focusSlotSelector": {
-    "message": "Enfocar el selector de espacio del editor"
+  "focusEditorTabs": {
+    "message": "Mover el foco a las pestañas del editor"
   },
-  "editorSlots": {
-    "message": "Espacios del editor"
+  "editorTabs": {
+    "message": "Pestañas del editor"
   },
-  "addNewSlot": {
-    "message": "Añadir nuevo espacio"
+  "addNewTab": {
+    "message": "Añadir nueva pestaña"
   },
   "untitled": {
     "message": "sin-titulo"

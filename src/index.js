@@ -6,7 +6,7 @@ import { editor } from './scripts/editor.js';
 import { EmojiService } from './services/EmojiService.js';
 import { EditorDataService } from './services/EditorDataService.js';
 import { keyBindings } from './scripts/key-bindings.js';
-import { slotSelector } from './scripts/slot-selector.js';
+import { editorTabs } from './scripts/editor-tabs.js';
 
 const resolveInOrder = (getPromiseList) =>
   getPromiseList.reduce(
@@ -28,7 +28,7 @@ resolveInOrder([
     bookmarks();
     editor();
     keyBindings();
-    slotSelector();
+    editorTabs();
   })
   .catch((error) => {
     console.log(error);

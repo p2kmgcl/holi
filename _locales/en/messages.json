@@ -35,14 +35,14 @@
   "focusTextEditor": {
     "message": "Focus text editor"
   },
-  "focusSlotSelector": {
-    "message": "Focus slot selector"
+  "focusEditorTabs": {
+    "message": "Focus editor tabs"
   },
-  "editorSlots": {
-    "message": "Editor slots"
+  "editorTabs": {
+    "message": "Editor tabs"
   },
-  "addNewSlot": {
-    "message": "Add new slot"
+  "addNewTab": {
+    "message": "Add new tab"
   },
   "untitled": {
     "message": "untitled"

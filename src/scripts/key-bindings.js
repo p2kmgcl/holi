@@ -33,8 +33,8 @@ export const keyBindings = () => {
     {
       keys: ['control', 'shift', 's'],
       action: () =>
-        document.querySelector('#slotSelectorList .checked input').focus(),
-      description: I18NService.get('focusSlotSelector'),
+        document.querySelector('#editorTabList .checked input').focus(),
+      description: I18NService.get('focusEditorTabs'),
     },
     {
       keys: ['control', '?'],
