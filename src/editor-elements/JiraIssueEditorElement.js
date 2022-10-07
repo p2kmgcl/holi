@@ -35,6 +35,7 @@ export const JiraIssueEditorElement = ({ text: url, matches, onRender }) => {
 
   link.appendChild(content);
 
+  /*
   FetchService.getCachedJSON(
     `https://cors-anywhere.herokuapp.com/https://issues.liferay.com/rest/api/latest/issue/${issueId}`
   ).then((issue) => {
@@ -49,6 +50,7 @@ export const JiraIssueEditorElement = ({ text: url, matches, onRender }) => {
 
     onRender();
   });
+  */
 
   return link;
 };
